@@ -57,7 +57,7 @@ dapui.setup({
     size = 40,
     position = "left", -- Can be "left", "right", "top", "bottom"
   },
-  tray = {
+  layouts = {
     elements = { "repl" },
     size = 10,
     position = "bottom", -- Can be "left", "right", "top", "bottom"

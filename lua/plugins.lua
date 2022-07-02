@@ -86,7 +86,7 @@ packer.startup({
     use("hrsh7th/cmp-nvim-lsp") -- { name = nvim_lsp }
     use("hrsh7th/cmp-buffer") -- { name = 'buffer' },
     use("hrsh7th/cmp-path") -- { name = 'path' }
-    use("hrsh7th/cmp-cmdline") -- { name = 'cmdline' }
+    -- use("hrsh7th/cmp-cmdline") -- { name = 'cmdline' }
     use("hrsh7th/cmp-nvim-lsp-signature-help") -- { name = 'nvim_lsp_signature_help' }
     -- 常见编程语言代码段
     use("rafamadriz/friendly-snippets")
@@ -94,7 +94,7 @@ packer.startup({
     use("onsails/lspkind-nvim")
     use("tami5/lspsaga.nvim")
     -- 代码格式化
-    use("mhartington/formatter.nvim")
+    -- use("mhartington/formatter.nvim")
     use({ "jose-elias-alvarez/null-ls.nvim", requires = "nvim-lua/plenary.nvim" })
     -- TypeScript 增强
     use({ "jose-elias-alvarez/nvim-lsp-ts-utils", requires = "nvim-lua/plenary.nvim" })
@@ -107,12 +107,12 @@ packer.startup({
     -- tokyonight
     use("folke/tokyonight.nvim")
     -- OceanicNext
-    use("mhartington/oceanic-next")
+    -- use("mhartington/oceanic-next")
     -- gruvbox
-    use({
-      "ellisonleao/gruvbox.nvim",
-      requires = { "rktjmp/lush.nvim" },
-    })
+    -- use({
+    --   "ellisonleao/gruvbox.nvim",
+    --   requires = { "rktjmp/lush.nvim" },
+    -- })
     -- zephyr
     -- use("glepnir/zephyr-nvim")
     -- nord
@@ -157,7 +157,7 @@ packer.startup({
     -- 自定义源
     git = {
       -- default_url_format = "https://hub.fastgit.xyz/%s",
-      -- default_url_format = "https://mirror.ghproxy.com/https://github.com/%s",
+      --default_url_format = "https://mirror.ghproxy.com/https://github.com/%s",
       -- default_url_format = "https://gitcode.net/mirrors/%s",
       -- default_url_format = "https://gitclone.com/github.com/%s",
     },
