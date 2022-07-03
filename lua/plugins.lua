@@ -86,7 +86,7 @@ packer.startup({
     use("hrsh7th/cmp-nvim-lsp") -- { name = nvim_lsp }
     use("hrsh7th/cmp-buffer") -- { name = 'buffer' },
     use("hrsh7th/cmp-path") -- { name = 'path' }
-    -- use("hrsh7th/cmp-cmdline") -- { name = 'cmdline' }
+    use("hrsh7th/cmp-cmdline") -- { name = 'cmdline' }
     use("hrsh7th/cmp-nvim-lsp-signature-help") -- { name = 'nvim_lsp_signature_help' }
     -- 常见编程语言代码段
     use("rafamadriz/friendly-snippets")
@@ -94,7 +94,7 @@ packer.startup({
     use("onsails/lspkind-nvim")
     use("tami5/lspsaga.nvim")
     -- 代码格式化
-    -- use("mhartington/formatter.nvim")
+    use("mhartington/formatter.nvim")
     use({ "jose-elias-alvarez/null-ls.nvim", requires = "nvim-lua/plenary.nvim" })
     -- TypeScript 增强
     use({ "jose-elias-alvarez/nvim-lsp-ts-utils", requires = "nvim-lua/plenary.nvim" })
@@ -140,7 +140,6 @@ packer.startup({
     use("rcarriga/nvim-dap-ui")
     -- use("Pocco81/DAPInstall.nvim")
     -- use("jbyuki/one-small-step-for-vimkind")
-
     use("j-hui/fidget.nvim")
     if paccker_bootstrap then
       packer.sync()
@@ -148,9 +147,9 @@ packer.startup({
   end,
   config = {
     -- 锁定插件版本在snapshots目录
-    snapshot_path = require("packer.util").join_paths(vim.fn.stdpath("config"), "snapshots"),
+    --snapshot_path = require("packer.util").join_paths(vim.fn.stdpath("config"), "snapshots"),
     -- 这里锁定插件版本在v1，不会继续更新插件
-    snapshot = "v1",
+    --snapshot = "v1",
 
     -- 最大并发数
     max_jobs = 16,

@@ -90,8 +90,9 @@ map("n", "<leader>l", "<C-w>l", opt)
 -- 左右比例控制
 map("n", "<C-Left>", ":vertical resize -2<CR>", opt)
 map("n", "<C-Right>", ":vertical resize +2<CR>", opt)
-map("n", "s,", ":vertical resize -10<CR>", opt)
-map("n", "s.", ":vertical resize +10<CR>", opt)
+map("n", "s.", ":vertical resize -10<CR>", opt)
+map("n", "s,", ":vertical resize +10<CR>", opt)
+
 -- 上下比例
 map("n", "sj", ":resize +10<CR>", opt)
 map("n", "sk", ":resize -10<CR>", opt)
@@ -122,8 +123,8 @@ map("n", "zz", ":foldclose<CR>", opt)
 map("n", "Z", ":foldopen<CR>", opt)
 
 -- nvim-tree
-map("n", "<A-m>", ":NvimTreeToggle<CR>", opt)
-map("n", "<leader>m", ":NvimTreeToggle<CR>", opt)
+map("n", "<A-e>", ":NvimTreeToggle<CR>", opt)
+map("n", "<leader>e", ":NvimTreeToggle<CR>", opt)
 -- 列表快捷键
 pluginKeys.nvimTreeList = { -- 打开文件或文件夹
   { key = { "o", "<2-LeftMouse>" }, action = "edit" },
