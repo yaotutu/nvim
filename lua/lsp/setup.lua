@@ -20,7 +20,7 @@ local servers = {
   tsserver = require("lsp.config.ts"),
   yamlls = require("lsp.config.yamlls"),
   vuels = require("lsp.config.vue"),
-  -- remark_ls = require("lsp.config.markdown"),
+  --remark_ls = require("lsp.config.markdown"),
 }
 
 for name, config in pairs(servers) do

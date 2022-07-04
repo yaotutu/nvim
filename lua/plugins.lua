@@ -102,12 +102,21 @@ packer.startup({
     use("folke/lua-dev.nvim")
     -- JSON 增强
     use("b0o/schemastore.nvim")
-
+    -- markdown privew
+    --use("davidgranstrom/nvim-markdown-preview")
+    --use("frabjous/knap")
+    -- use("godlygeek/tabular")
+    -- use("preservim/vim-markdown")
+    use({
+      "iamcco/markdown-preview.nvim",
+      run = function() vim.fn["mkdp#util#install"]() end,
+  })
+    use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
     --------------------- colorschemes --------------------
     -- tokyonight
     use("folke/tokyonight.nvim")
     -- OceanicNext
-    -- use("mhartington/oceanic-next")
+    -- use("mhartington/oceanic-next.nvim")
     -- gruvbox
     -- use({
     --   "ellisonleao/gruvbox.nvim",
@@ -115,12 +124,12 @@ packer.startup({
     -- })
     -- zephyr
     -- use("glepnir/zephyr-nvim")
-    -- nord
-    use("shaunsingh/nord.nvim")
-    -- onedark
-    use("ful1e5/onedark.nvim")
-    -- nightfox
-    use("EdenEast/nightfox.nvim")
+    -- -- nord
+    -- use("shaunsingh/nord.nvim")
+    -- -- onedark
+    -- use("ful1e5/onedark.nvim")
+    -- -- nightfox
+    -- use("EdenEast/nightfox.nvim")
 
     -------------------------------------------------------
     use({ "akinsho/toggleterm.nvim" })
