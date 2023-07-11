@@ -28,7 +28,8 @@ return {
 
             }
             require('lspconfig').tsserver.setup {}
-            -- require('lspconfig').tailwindcss.setup {}
+            require('lspconfig').tailwindcss.setup {}
+            require('lspconfig').cssls.setup {}
             require 'lspconfig'.volar.setup {
                 filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' }
             }
