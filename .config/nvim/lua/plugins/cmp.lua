@@ -66,6 +66,7 @@ return {
             "rafamadriz/friendly-snippets",
             config = function()
                 require("luasnip.loaders.from_vscode").lazy_load()
+                require("luasnip").filetype_extend("typescript", { "javascript" })
             end,
         },
         opts = {
@@ -87,4 +88,11 @@ return {
             { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
         },
     },
+    {
+        "rafamadriz/friendly-snippets",
+        config = function()
+            require("luasnip.loaders.from_vscode").lazy_load()
+            require("luasnip").filetype_extend("typescript", { "javascript" })
+        end,
+    }
 }
