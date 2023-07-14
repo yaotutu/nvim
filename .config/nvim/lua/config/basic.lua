@@ -83,3 +83,5 @@ vim.o.showmode = false
 vim.opt.clipboard = "unnamedplus"
 -- rcarriga/nvim-notify 配置
 vim.opt.termguicolors = true
+
+
