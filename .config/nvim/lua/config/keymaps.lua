@@ -96,17 +96,17 @@ map("n", "<A-l>", "<C-w>l", opt)
 -- map("n", "<leader>l", "<C-w>l", opt)
 
 -- 左右比例控制
-map("n", "<C-Left>", ":vertical resize -2<CR>", opt)
-map("n", "<C-Right>", ":vertical resize +2<CR>", opt)
-map("n", "<leader>ssh", ":vertical resize -2<CR>", opt)
-map("n", "<leader>ssl", ":vertical resize +2<CR>", opt)
+map("n", "<leader>sh", ":vertical resize -2<CR>", opt)
+map("n", "<leader>sl", ":vertical resize +2<CR>", opt)
+map("n", "<leader>sH", ":vertical resize -10<CR>", opt)
+map("n", "<leader>sL", ":vertical resize +10<CR>", opt)
 -- 上下比例
-map("n", "<leader>ssk", ":resize +2<CR>", opt)
-map("n", "<leader>ssj", ":resize -2<CR>", opt)
-map("n", "<C-Down>", ":resize +2<CR>", opt)
-map("n", "<C-Up>", ":resize -2<CR>", opt)
+map("n", "<leader>sk", ":resize +2<CR>", opt)
+map("n", "<leader>sj", ":resize -2<CR>", opt)
+map("n", "<leader>sK", ":resize +10<CR>", opt)
+map("n", "<leader>sJ", ":resize -10<CR>", opt)
 -- 相等比例
-map("n", "s=", "<C-w>=", opt)
+map("n", "<leader>s=", "<C-w>=", opt)
 -- Terminal相关
 map("n", "<leader>st", ":sp | terminal<CR>", opt)
 map("n", "<leader>stv", ":vsp | terminal<CR>", opt)
@@ -125,16 +125,11 @@ map("t", "<A-l>", [[ <C-\><C-N><C-w>l ]], opt)
 --------------------------------------------------------------------
 -- 插件快捷键
 local pluginKeys = {}
-
-
 -- lazygit
-
 map("n", '<leader>gg', ':LazyGit<CR>', opt)
-
 -- treesitter 折叠
 map("n", "zz", ":foldclose<CR>", opt)
 map("n", "Z", ":foldopen<CR>", opt)
-
 -- nvim-tree
 map("n", "<A-m>", ":NvimTreeToggle<CR>", opt)
 map("n", "<leader>m", ":NvimTreeToggle<CR>", opt)
