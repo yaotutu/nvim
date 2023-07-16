@@ -87,6 +87,11 @@ return {
             { "<tab>",   function() require("luasnip").jump(1) end,  mode = "s" },
             { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
         },
+        config = function(_, opts)
+            -- 代码片段时的select模式关闭p的粘贴功能
+            vim.keymap.set("s", "p", function() vim.api.nvim_feedkeys("p", "n", false) end,
+                { silent = true, remap = false, desc = "Don't paste in select mode" })
+        end
     },
     {
         "rafamadriz/friendly-snippets",

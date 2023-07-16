@@ -78,10 +78,10 @@ map("n", "<leader>q", ":qa!<CR>", opt)
 ------------------------------------------------------------------
 -- 取消 s 默认功能
 -- map("n", "s", "", opt)
-map("n", "<leader>sv", ":vsp<CR>", opt)
-map("n", "<leader>sh", ":sp<CR>", opt)
+map("n", "<leader>s-", ":vsp<CR>", opt)
+map("n", "<leader>s_", ":sp<CR>", opt)
 -- 关闭当前
-map("n", "<leader>sc", "<C-w>c", opt)
+map("n", "<leader>sw", "<C-w>c", opt)
 -- 关闭其他
 map("n", "<leader>so", "<C-w>o", opt) -- close others
 -- alt + hjkl  窗口之间跳转
@@ -94,14 +94,15 @@ map("n", "<A-l>", "<C-w>l", opt)
 -- map("n", "<leader>j", "<C-w>j", opt)
 -- map("n", "<leader>k", "<C-w>k", opt)
 -- map("n", "<leader>l", "<C-w>l", opt)
+
 -- 左右比例控制
 map("n", "<C-Left>", ":vertical resize -2<CR>", opt)
 map("n", "<C-Right>", ":vertical resize +2<CR>", opt)
 map("n", "<leader>ssh", ":vertical resize -2<CR>", opt)
 map("n", "<leader>ssl", ":vertical resize +2<CR>", opt)
 -- 上下比例
-map("n", "<leader>ssj", ":resize +2<CR>", opt)
-map("n", "<leader>ssk", ":resize -2<CR>", opt)
+map("n", "<leader>ssk", ":resize +2<CR>", opt)
+map("n", "<leader>ssj", ":resize -2<CR>", opt)
 map("n", "<C-Down>", ":resize +2<CR>", opt)
 map("n", "<C-Up>", ":resize -2<CR>", opt)
 -- 相等比例
@@ -119,6 +120,8 @@ map("t", "<A-l>", [[ <C-\><C-N><C-w>l ]], opt)
 -- map("t", "<leader>j", [[ <C-\><C-N><C-w>j ]], opt)
 -- map("t", "<leader>k", [[ <C-\><C-N><C-w>k ]], opt)
 -- map("t", "<leader>l", [[ <C-\><C-N><C-w>l ]], opt)
+
+
 --------------------------------------------------------------------
 -- 插件快捷键
 local pluginKeys = {}
@@ -258,6 +261,24 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end, opts)
     end,
 })
+-- noice
+-- :Noice or :Noice history shows the message history
+-- :Noice last shows the last message in a popup
+-- :Noice dismiss dismiss all visible messages
+-- :Noice errors shows the error messages in a split. Last errors on top
+-- :Noice disable disables Noice
+-- :Noice enable enables Noice
+-- :Noice stats shows debugging stats
+-- :Noice telescope opens message history in Telescope
+vim.keymap.set("n", "<leader>nl", function()
+    require("noice").cmd("last")
+end)
+vim.keymap.set("n", "<leader>nl", function()
+    require("noice").cmd("dismiss")
+end)
+vim.keymap.set("n", "<leader>nh", function()
+    require("noice").cmd("history")
+end)
 
 -- typescript 快捷键
 -- pluginKeys.mapTsLSP = function(mapbuf)
