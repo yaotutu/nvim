@@ -130,9 +130,13 @@ map("n", '<leader>gg', ':LazyGit<CR>', opt)
 -- treesitter 折叠
 map("n", "zz", ":foldclose<CR>", opt)
 map("n", "Z", ":foldopen<CR>", opt)
+
+
+
+
 -- nvim-tree
-map("n", "<A-m>", ":NvimTreeToggle<CR>", opt)
-map("n", "<leader>m", ":NvimTreeToggle<CR>", opt)
+-- map("n", "<A-m>", ":NvimTreeToggle<CR>", opt)
+-- map("n", "<leader>m", ":NvimTreeToggle<CR>", opt)
 pluginKeys.nvimTreeList = function(bufnr)
     local api = require('nvim-tree.api')
     local function opts(desc)
@@ -152,6 +156,7 @@ pluginKeys.nvimTreeList = function(bufnr)
     vim.keymap.set('n', 'x', api.fs.cut, opts('Cut'))
     vim.keymap.set('n', 'c', api.fs.copy.node, opts('Copy'))
     vim.keymap.set('n', 'p', api.fs.paste, opts('Paste'))
+
     vim.keymap.set('n', 'y', api.fs.copy.filename, opts('Copy Name'))
     vim.keymap.set('n', 'Y', api.fs.copy.relative_path, opts('Copy Relative Path'))
     vim.keymap.set('n', 'gy', api.fs.copy.absolute_path, opts('Copy Absolute Path'))
