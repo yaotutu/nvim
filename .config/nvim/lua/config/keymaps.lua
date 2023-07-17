@@ -81,7 +81,7 @@ map("n", "<leader>q", ":qa!<CR>", opt)
 map("n", "<leader>s-", ":vsp<CR>", opt)
 map("n", "<leader>s_", ":sp<CR>", opt)
 -- 关闭当前
-map("n", "<leader>sw", "<C-w>c", opt)
+map("n", "<leader>sc", "<C-w>c", opt)
 -- 关闭其他
 map("n", "<leader>so", "<C-w>o", opt) -- close others
 -- alt + hjkl  窗口之间跳转
@@ -171,7 +171,7 @@ end
 map("n", "<C-h>", ":BufferLineCyclePrev<CR>", opt)
 map("n", "<C-l>", ":BufferLineCycleNext<CR>", opt)
 -- "moll/vim-bbye" 关闭当前 buffer
-map("n", "<leader>bw", ":Bdelete!<CR>", opt)
+map("n", "<leader>bc", ":Bdelete!<CR>", opt)
 
 -- 关闭左/右侧标签页
 map("n", "<leader>bh", ":BufferLineCloseLeft<CR>", opt)
