@@ -111,7 +111,7 @@ map("n", "<leader>s=", "<C-w>=", opt)
 map("n", "<leader>st", ":sp | terminal<CR>", opt)
 map("n", "<leader>stv", ":vsp | terminal<CR>", opt)
 -- Esc 回 Normal 模式
-map("t", "<Esc>", "<C-\\><C-n>", opt)
+-- map("t", "<Esc>", "<C-\\><C-n>", opt)
 map("t", "<A-h>", [[ <C-\><C-N><C-w>h ]], opt)
 map("t", "<A-j>", [[ <C-\><C-N><C-w>j ]], opt)
 map("t", "<A-k>", [[ <C-\><C-N><C-w>k ]], opt)
