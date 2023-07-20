@@ -2,8 +2,9 @@ return {
     "nvim-treesitter/nvim-treesitter",
     event = { "BufReadPost", "BufNewFile" },
     opts = {
-        ensure_installed = {
-
+        ensure_installed = {},
+        autotag = {
+            enable = true,
         },
         highlight = { enable = true },
         indent = { enable = true },
