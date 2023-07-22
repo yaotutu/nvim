@@ -39,6 +39,7 @@ return {
             require 'lspconfig'.emmet_language_server.setup {
                 filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' }
             }
+            require 'lspconfig'.marksman .setup {}
 
 
             -- require 'lspconfig'.unocss.setup {}
