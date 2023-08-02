@@ -23,31 +23,14 @@ return {
                  vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
                  vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
                  vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
-                --  按下h，隐藏浮动的终端，这个方法不优雅，暂时还不知道怎么隐藏这个float，暂时用这个方法
-                 vim.api.nvim_buf_set_keymap(0, "n ", "h", ":ToggleTerm direction=float<CR>", opts)
-
                end
                
-               vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
-               
-               local Terminal = require("toggleterm.terminal").Terminal
-               local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
-               
-               function _LAZYGIT_TOGGLE()
-                lazygit:toggle()
-               end
-               
-               local node = Terminal:new({ cmd = "node", hidden = true })
-               
-               function _NODE_TOGGLE()
-                node:toggle()
-               end
-               
-               local python = Terminal:new({ cmd = "python3", hidden = true })
-               
-               function _PYTHON_TOGGLE()
-                python:toggle()
-               end 
+               vim.api.nvim_create_autocmd("TermOpen", {
+                pattern = "term://*",
+                callback = function()
+                  set_terminal_keymaps()
+                end
+              })               
     end
 }
 
