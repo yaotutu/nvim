@@ -25,6 +25,7 @@ return {
       require("plugins.lsp.emmet").setup()
       require("plugins.lsp.marksman").setup()
       require("plugins.lsp.volar").setup()
+      require("plugins.lsp.gopls").setup()
     end,
   },
 }
