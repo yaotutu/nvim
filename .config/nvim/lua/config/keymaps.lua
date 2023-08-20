@@ -102,7 +102,7 @@ map("n", "<leader>s=", "<C-w>=", opt)
 map("n", "<Leader>t-", ":ToggleTerm direction=vertical<CR>", opt)
 
 -- 垂直分割终端
-map("n", "<Leader>t_", ":ToggleTerm direction=horizontal<CR>", opt) 
+map("n", "<Leader>t_", ":ToggleTerm direction=horizontal<CR>", opt)
 
 map("n", "<leader>tf", ":ToggleTerm direction=float<CR>", opt)
 
@@ -196,4 +196,11 @@ end)
 --     mapbuf("n", "gR", ":TSLspRenameFile<CR>", opt)
 --     mapbuf("n", "gi", ":TSLspImportAll<CR>", opt)
 -- end
+vim.keymap.set('n', '<leader>r', ':RunFile float<CR>', { noremap = true, silent = false })
+vim.keymap.set('n', '<leader>rf', ':RunFile<CR>', { noremap = true, silent = false })
+vim.keymap.set('n', '<leader>rft', ':RunFile tab<CR>', { noremap = true, silent = false })
+vim.keymap.set('n', '<leader>rp', ':RunProject<CR>', { noremap = true, silent = false })
+vim.keymap.set('n', '<leader>rc', ':RunClose<CR>', { noremap = true, silent = false })
+vim.keymap.set('n', '<leader>crf', ':CRFiletype<CR>', { noremap = true, silent = false })
+vim.keymap.set('n', '<leader>crp', ':CRProjects<CR>', { noremap = true, silent = false })
 return pluginKeys
