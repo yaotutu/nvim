@@ -65,8 +65,8 @@ map("n", "qq", ":q!<CR>", opt)
 map("n", "<leader>q", ":qa!<CR>", opt)
 
 -- insert 模式下，跳到行首行尾
--- map("i", "<C-h>", "<ESC>I", opt)
--- map("i", "<C-l>", "<ESC>A", opt)
+map("i", "<C-h>", "<ESC>I", opt)
+map("i", "<C-l>", "<ESC>A", opt)
 
 ------------------------------------------------------------------
 -- windows 分屏快捷键
@@ -85,6 +85,7 @@ map("n", "<A-j>", "<C-w>j", opt)
 map("n", "<A-k>", "<C-w>k", opt)
 map("n", "<A-l>", "<C-w>l", opt)
 
+
 -- 左右比例控制
 map("n", "<leader>sh", ":vertical resize -2<CR>", opt)
 map("n", "<leader>sl", ":vertical resize +2<CR>", opt)
@@ -97,15 +98,16 @@ map("n", "<leader>sK", ":resize +10<CR>", opt)
 map("n", "<leader>sJ", ":resize -10<CR>", opt)
 -- 相等比例
 map("n", "<leader>s=", "<C-w>=", opt)
-
 -- 水平分割终端
 map("n", "<Leader>t-", ":ToggleTerm direction=vertical<CR>", opt)
-
 -- 垂直分割终端
 map("n", "<Leader>t_", ":ToggleTerm direction=horizontal<CR>", opt)
-
 map("n", "<leader>tf", ":ToggleTerm direction=float<CR>", opt)
-
+-- save file
+map("i", "<C-s>", "<cmd>w<cr><esc>", opt)
+map("v", "<C-s>", "<cmd>w<cr><esc>", opt)
+map("n", "<C-s>", "<cmd>w<cr><esc>", opt)
+map("s", "<C-s>", "<cmd>w<cr><esc>", opt)
 
 --------------------------------------------------------------------
 -- 插件快捷键
@@ -116,15 +118,12 @@ map("n", '<leader>gg', ':LazyGit<CR>', opt)
 map("n", "zz", ":foldclose<CR>", opt)
 map("n", "Z", ":foldopen<CR>", opt)
 
-
-
 -- bufferline
 -- 左右Tab切换
-map("n", "<C-h>", ":BufferLineCyclePrev<CR>", opt)
-map("n", "<C-l>", ":BufferLineCycleNext<CR>", opt)
+map("n", "<leader>bk", ":BufferLineCyclePrev<CR>", opt)
+map("n", "<leader>bj", ":BufferLineCycleNext<CR>", opt)
 -- "moll/vim-bbye" 关闭当前 buffer
 map("n", "<leader>bc", ":Bdelete!<CR>", opt)
-
 -- 关闭左/右侧标签页
 map("n", "<leader>bh", ":BufferLineCloseLeft<CR>", opt)
 map("n", "<leader>bl", ":BufferLineCloseRight<CR>", opt)
@@ -151,8 +150,6 @@ map("n", "<C-_>", "gcc", { noremap = false })
 map("v", "<C-_>", "gcc", { noremap = false })
 
 -- lsp 快捷键设置
--- Use LspAttach autocommand to only map the following keys
--- after the language server attaches to the current buffer
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('UserLspConfig', {}),
     callback = function(ev)
@@ -190,12 +187,6 @@ vim.keymap.set("n", "<leader>nh", function()
     require("noice").cmd("history")
 end)
 
--- typescript 快捷键
--- pluginKeys.mapTsLSP = function(mapbuf)
---     mapbuf("n", "gs", ":TSLspOrganize<CR>", opt)
---     mapbuf("n", "gR", ":TSLspRenameFile<CR>", opt)
---     mapbuf("n", "gi", ":TSLspImportAll<CR>", opt)
--- end
 vim.keymap.set('n', '<leader>r', ':RunFile float<CR>', { noremap = true, silent = false })
 vim.keymap.set('n', '<leader>rf', ':RunFile<CR>', { noremap = true, silent = false })
 vim.keymap.set('n', '<leader>rft', ':RunFile tab<CR>', { noremap = true, silent = false })
