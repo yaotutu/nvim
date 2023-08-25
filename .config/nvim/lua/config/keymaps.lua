@@ -206,5 +206,21 @@ vim.keymap.set('n', '<leader>sp', '<cmd>lua require("spectre").open_file_search(
     desc = "Search on current file"
 })
 
+vim.keymap.set('n', '<leader>ff', "<cmd>Telescope live_grep<cr>", opt)
+vim.keymap.set('n', '<leader>fb', "<cmd>Telescope buffers<cr>", opt)
+vim.keymap.set('n', '<leader>fh', "<cmd>Telescope help_tags<cr>", opt)
+vim.keymap.set('n', '<leader>ft', "<cmd>Telescope treesitter<cr>", opt)
+vim.keymap.set('n', '<leader>fs', "<cmd>Telescope lsp_document_symbols<cr>", opt)
+vim.keymap.set('n', '<leader>fd', "<cmd>Telescope lsp_document_diagnostics<cr>", opt)
+vim.keymap.set('n', '<leader>fc', "<cmd>Telescope lsp_code_actions<cr>", opt)
+vim.keymap.set('n', '<leader>fr', "<cmd>Telescope lsp_references<cr>", opt)
+vim.keymap.set('n', '<leader>fw', "<cmd>Telescope lsp_workspace_diagnostics<cr>", opt)
+vim.keymap.set('n', '<leader>fl', "<cmd>Telescope lsp_document_diagnostics<cr>", opt)
+vim.keymap.set('n', '<leader>fn', "<cmd>Telescope lsp_document_symbols<cr>", opt)
+vim.keymap.set('n', '<leader>fm', "<cmd>Telescope lsp_implementations<cr>", opt)
+vim.keymap.set('n', '<leader>fp', "<cmd>Telescope lsp_definitions<cr>", opt)
+vim.keymap.set('n', '<leader>fq', "<cmd>Telescope quickfix<cr>", opt)
+vim.keymap.set('n', '<leader>fo', "<cmd>Telescope oldfiles<cr>", opt)
+
 
 return pluginKeys
