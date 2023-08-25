@@ -57,9 +57,6 @@ return {
     -- snippets
     {
         "L3MON4D3/LuaSnip",
-        build = (not jit.os:find("Windows"))
-            and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
-            or nil,
         dependencies = {
             "rafamadriz/friendly-snippets",
             config = function()
@@ -90,12 +87,5 @@ return {
             vim.keymap.set("s", "p", function() vim.api.nvim_feedkeys("p", "n", false) end,
                 { silent = true, remap = false, desc = "Don't paste in select mode" })
         end
-    },
-    {
-        "rafamadriz/friendly-snippets",
-        config = function()
-            require("luasnip.loaders.from_vscode").lazy_load()
-            require("luasnip").filetype_extend("typescript", { "javascript" })
-        end,
     }
 }

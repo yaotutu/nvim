@@ -20,7 +20,7 @@ return {
                     scope_incremental = "<TAB>",
                 },
             },
-            
+
         },
         config = function(_, opts)
             require("nvim-treesitter.configs").setup(opts)
@@ -33,7 +33,6 @@ return {
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
         event = { "BufReadPost", "BufNewFile" },
-        after = { "nvim-treesitter" },
         config = function()
             require("nvim-treesitter.configs").setup({
                 textobjects = {
