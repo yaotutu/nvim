@@ -12,6 +12,15 @@ return {
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
+      {
+        'j-hui/fidget.nvim',
+        tag = 'legacy',
+        config = function()
+          require("fidget").setup {
+            -- options
+          }
+        end,
+      }
     },
     config = function()
       -- 通用配置

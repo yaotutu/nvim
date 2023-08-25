@@ -134,19 +134,6 @@ map("n", "<leader>bo", ":BufferLineCloseRight<CR>:BufferLineCloseLeft<CR>", opt)
 -- 关闭选中标签页
 map("n", "<leader>bp", ":BufferLinePickClose<CR>", opt)
 
--- 代码注释插件
-pluginKeys.comment = {
-    -- Normal 模式快捷键
-    toggler = {
-        line = "gcc",  -- 行注释
-        block = "gbc", -- 块注释
-    },
-    -- Visual 模式
-    opleader = {
-        line = "gc",
-        bock = "gb",
-    },
-}
 -- ctrl + /
 map("n", "<C-_>", "gcc", { noremap = false })
 map("v", "<C-_>", "gcc", { noremap = false })
@@ -188,13 +175,36 @@ end)
 vim.keymap.set("n", "<leader>nh", function()
     require("noice").cmd("history")
 end)
+vim.keymap.set("n", "<leader>nt", function()
+    require("noice").cmd("telescope")
+end)
 
--- vim.keymap.set('n', '<leader>r', 'lua require’sniprun’.run()', { noremap = true, silent = false })
-
+-- SnipRun
 vim.api.nvim_set_keymap('v', 'r', '<Plug>SnipRun', { silent = true })
 vim.api.nvim_set_keymap('n', '<leader>rx', '<Plug>SnipClose', { silent = true })
 vim.api.nvim_set_keymap("n", "<leader>r", "ggVG<leader><Plug>SnipRun", { noremap = true })
 
+-- trouble
+vim.keymap.set("n", "<leader>xx", function() require("trouble").open() end)
+vim.keymap.set("n", "<leader>xw", function() require("trouble").open("workspace_diagnostics") end)
+vim.keymap.set("n", "<leader>xd", function() require("trouble").open("document_diagnostics") end)
+vim.keymap.set("n", "<leader>xq", function() require("trouble").open("quickfix") end)
+vim.keymap.set("n", "<leader>xl", function() require("trouble").open("loclist") end)
+vim.keymap.set("n", "gR", function() require("trouble").open("lsp_references") end)
+
+-- spectre
+vim.keymap.set('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
+    desc = "Toggle Spectre"
+})
+vim.keymap.set('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
+    desc = "Search current word"
+})
+vim.keymap.set('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>', {
+    desc = "Search current word"
+})
+vim.keymap.set('n', '<leader>sp', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
+    desc = "Search on current file"
+})
 
 
 return pluginKeys

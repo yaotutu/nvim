@@ -1,3 +1,6 @@
+-- 获取系统
+local os = vim.loop.os_uname().sysname
+
 local function augroup(name)
     return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
 end
@@ -27,3 +30,21 @@ vim.api.nvim_create_autocmd("BufReadPost", {
         end
     end,
 })
+
+-- 定义autocmd命令
+local cmd = [[
+  augroup sync_clipboard
+    autocmd!
+    autocmd TextYankPost * :call system('pbcopy', @0)
+  augroup END
+]]
+
+-- 根据系统执行
+if os == "Darwin" then
+    vim.cmd(cmd)
+elseif os == "Linux" then
+    vim.cmd(string.gsub(cmd, "clip", "xclip -selection clipboard"))
+elseif os == "Windows_NT" then
+    -- Windows系统使用clip.exe
+    vim.cmd(string.gsub(cmd, "clip", 'C:\\Windows\\System32\\clip.exe'))
+end

@@ -9,13 +9,21 @@ return {
             delay = 100,
             ignore_whitespace = false,
         },
+        -- signs = {
+        --     add = { text = "▎" },
+        --     change = { text = "▎" },
+        --     delete = { text = "" },
+        --     topdelete = { text = "" },
+        --     changedelete = { text = "▎" },
+        --     untracked = { text = "▎" },
+        -- },
+        -- 字母图标 A 增加，C修改，D 删除
         signs = {
-            add = { text = "▎" },
-            change = { text = "▎" },
-            delete = { text = "" },
-            topdelete = { text = "" },
-            changedelete = { text = "▎" },
-            untracked = { text = "▎" },
+            add = { hl = "GitSignsAdd", text = "A|", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
+            change = { hl = "GitSignsChange", text = "C|", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
+            delete = { hl = "GitSignsDelete", text = "D_", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
+            topdelete = { hl = "GitSignsDelete", text = "D‾", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
+            changedelete = { hl = "GitSignsChange", text = "D~", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
         },
         on_attach = function(buffer)
             local gs = package.loaded.gitsigns
