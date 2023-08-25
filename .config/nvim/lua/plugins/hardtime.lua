@@ -10,8 +10,8 @@ return {
                 ["<Left>"] = {},
                 ["<Right>"] = {},
             },
-            max_count = 100,
-            max_time = 50000,
+            max_count = 1000000,
+            max_time = 500000000,
         })
     end
 }

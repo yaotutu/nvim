@@ -103,6 +103,8 @@ map("n", "<Leader>t-", ":ToggleTerm direction=vertical<CR>", opt)
 -- 垂直分割终端
 map("n", "<Leader>t_", ":ToggleTerm direction=horizontal<CR>", opt)
 map("n", "<leader>tf", ":ToggleTerm direction=float<CR>", opt)
+-- 退出终端
+map('t', ',,', '<C-\\><C-n>', opt)
 -- save file
 map("i", "<C-s>", "<cmd>w<cr><esc>", opt)
 map("v", "<C-s>", "<cmd>w<cr><esc>", opt)
@@ -120,8 +122,8 @@ map("n", "Z", ":foldopen<CR>", opt)
 
 -- bufferline
 -- 左右Tab切换
-map("n", "<leader>bk", ":BufferLineCyclePrev<CR>", opt)
-map("n", "<leader>bj", ":BufferLineCycleNext<CR>", opt)
+map("n", "<C-h>", ":BufferLineCyclePrev<CR>", opt)
+map("n", "<C-l>", ":BufferLineCycleNext<CR>", opt)
 -- "moll/vim-bbye" 关闭当前 buffer
 map("n", "<leader>bc", ":Bdelete!<CR>", opt)
 -- 关闭左/右侧标签页
@@ -187,11 +189,12 @@ vim.keymap.set("n", "<leader>nh", function()
     require("noice").cmd("history")
 end)
 
-vim.keymap.set('n', '<leader>r', ':RunFile float<CR>', { noremap = true, silent = false })
-vim.keymap.set('n', '<leader>rf', ':RunFile<CR>', { noremap = true, silent = false })
-vim.keymap.set('n', '<leader>rft', ':RunFile tab<CR>', { noremap = true, silent = false })
-vim.keymap.set('n', '<leader>rp', ':RunProject<CR>', { noremap = true, silent = false })
-vim.keymap.set('n', '<leader>rc', ':RunClose<CR>', { noremap = true, silent = false })
-vim.keymap.set('n', '<leader>crf', ':CRFiletype<CR>', { noremap = true, silent = false })
-vim.keymap.set('n', '<leader>crp', ':CRProjects<CR>', { noremap = true, silent = false })
+-- vim.keymap.set('n', '<leader>r', 'lua require’sniprun’.run()', { noremap = true, silent = false })
+
+vim.api.nvim_set_keymap('v', 'r', '<Plug>SnipRun', { silent = true })
+vim.api.nvim_set_keymap('n', '<leader>rx', '<Plug>SnipClose', { silent = true })
+vim.api.nvim_set_keymap("n", "<leader>r", "ggVG<leader><Plug>SnipRun", { noremap = true })
+
+
+
 return pluginKeys
