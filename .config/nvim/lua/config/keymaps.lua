@@ -1,3 +1,5 @@
+local Util = require("util")
+
 -- 测试函数,用于测试当前文件是否被加载
 -- vim.notify("Hello, world!", vim.log.INFO, { title = "Notification", timeout = 3000 })
 
@@ -206,21 +208,17 @@ vim.keymap.set('n', '<leader>sp', '<cmd>lua require("spectre").open_file_search(
     desc = "Search on current file"
 })
 
-vim.keymap.set('n', '<leader>ff', "<cmd>Telescope live_grep<cr>", opt)
+-- telescope
+-- vim.keymap.set('n', '<leader>ff', "<cmd>Telescope live_grep<cr>", opt)
 vim.keymap.set('n', '<leader>fb', "<cmd>Telescope buffers<cr>", opt)
-vim.keymap.set('n', '<leader>fh', "<cmd>Telescope help_tags<cr>", opt)
-vim.keymap.set('n', '<leader>ft', "<cmd>Telescope treesitter<cr>", opt)
-vim.keymap.set('n', '<leader>fs', "<cmd>Telescope lsp_document_symbols<cr>", opt)
-vim.keymap.set('n', '<leader>fd', "<cmd>Telescope lsp_document_diagnostics<cr>", opt)
-vim.keymap.set('n', '<leader>fc', "<cmd>Telescope lsp_code_actions<cr>", opt)
-vim.keymap.set('n', '<leader>fr', "<cmd>Telescope lsp_references<cr>", opt)
-vim.keymap.set('n', '<leader>fw', "<cmd>Telescope lsp_workspace_diagnostics<cr>", opt)
-vim.keymap.set('n', '<leader>fl', "<cmd>Telescope lsp_document_diagnostics<cr>", opt)
-vim.keymap.set('n', '<leader>fn', "<cmd>Telescope lsp_document_symbols<cr>", opt)
-vim.keymap.set('n', '<leader>fm', "<cmd>Telescope lsp_implementations<cr>", opt)
-vim.keymap.set('n', '<leader>fp', "<cmd>Telescope lsp_definitions<cr>", opt)
-vim.keymap.set('n', '<leader>fq', "<cmd>Telescope quickfix<cr>", opt)
-vim.keymap.set('n', '<leader>fo', "<cmd>Telescope oldfiles<cr>", opt)
+vim.keymap.set('n', '<leader>ff', Util.telescope("files"), opt)
+vim.keymap.set('n', '<leader>fF', Util.telescope("files", { cwd = false }), opt)
+vim.keymap.set('n', '<leader>fr', "<cmd>Telescope oldfiles<cr>", opt)
+vim.keymap.set('n', '<leader>fR', Util.telescope("oldfiles", { cwd = vim.loop.cwd() }), opt)
+-- git
+vim.keymap.set('n', '<leader>gc', "<cmd>Telescope git_commits<cr>", opt)
+vim.keymap.set('n', '<leader>gs', "<cmd>Telescope git_status<cr>", opt)
+
 
 
 return pluginKeys
