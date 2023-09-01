@@ -5,6 +5,7 @@ return {
         cmd = { "TSUpdateSync" },
         opts = {
             ensure_installed = {},
+            ignore_install = { "dart" },
             autotag = {
                 enable = true,
             },
