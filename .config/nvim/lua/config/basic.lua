@@ -83,3 +83,9 @@ vim.o.showmode = false
 -- vim.opt.clipboard = "unnamedplus"
 -- rcarriga/nvim-notify 配置
 vim.opt.termguicolors = true
+
+local signs = { Error = "󰅚", Warn = "", Hint = "", Info = "" }
+for type, icon in pairs(signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end

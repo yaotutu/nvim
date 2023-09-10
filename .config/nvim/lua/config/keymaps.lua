@@ -32,8 +32,6 @@ map("n", "g_", "$", opt)
 map("c", "<C-j>", "<C-n>", { noremap = false })
 map("c", "<C-k>", "<C-p>", { noremap = false })
 
-map("n", "<leader>w", ":w<CR>", opt)
-map("n", "<leader>wq", ":wqa!<CR>", opt)
 
 -- fix :set wrap
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -89,17 +87,17 @@ map("n", "<A-l>", "<C-w>l", opt)
 
 
 -- 左右比例控制
-map("n", "<leader>sh", ":vertical resize -2<CR>", opt)
-map("n", "<leader>sl", ":vertical resize +2<CR>", opt)
-map("n", "<leader>sH", ":vertical resize -10<CR>", opt)
-map("n", "<leader>sL", ":vertical resize +10<CR>", opt)
+map("n", "<leader>wh", ":vertical resize -2<CR>", opt)
+map("n", "<leader>wl", ":vertical resize +2<CR>", opt)
+map("n", "<leader>wH", ":vertical resize -10<CR>", opt)
+map("n", "<leader>wL", ":vertical resize +10<CR>", opt)
 -- 上下比例
-map("n", "<leader>sk", ":resize +2<CR>", opt)
-map("n", "<leader>sj", ":resize -2<CR>", opt)
-map("n", "<leader>sK", ":resize +10<CR>", opt)
-map("n", "<leader>sJ", ":resize -10<CR>", opt)
+map("n", "<leader>wk", ":resize +2<CR>", opt)
+map("n", "<leader>wj", ":resize -2<CR>", opt)
+map("n", "<leader>wK", ":resize +10<CR>", opt)
+map("n", "<leader>wJ", ":resize -10<CR>", opt)
 -- 相等比例
-map("n", "<leader>s=", "<C-w>=", opt)
+map("n", "<leader>w=", "<C-w>=", opt)
 -- 水平分割终端
 map("n", "<Leader>t-", ":ToggleTerm direction=vertical<CR>", opt)
 -- 垂直分割终端
