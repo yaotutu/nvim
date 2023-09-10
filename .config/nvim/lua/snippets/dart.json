@@ -1,0 +1,6 @@
+{
+    "my snippet": {
+      "prefix": "msnip",
+      "body": ["my snippet content", "$0"] 
+    }
+  }

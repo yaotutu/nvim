@@ -7,9 +7,10 @@ return {
     },
     config = function()
         require("flutter-tools").setup {
-            outline = {
-                open_cmd = "10vnew", -- command to use to open the outline buffer
-                auto_open = false    -- if true this will open the outline automatically when it is first populated
+            dev_log = {
+                enabled = true,
+                notify_errors = false, -- if there is an error whilst running then notify the user
+                open_cmd = "sp",       -- command to use to open the log buffer
             },
         }
     end
