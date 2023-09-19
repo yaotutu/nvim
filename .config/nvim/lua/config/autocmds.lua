@@ -48,3 +48,12 @@ elseif os == "Windows_NT" then
     -- Windows系统使用clip.exe
     vim.cmd(string.gsub(cmd, "clip", 'C:\\Windows\\System32\\clip.exe'))
 end
+
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'dart',
+    callback = function()
+        vim.api.nvim_buf_set_keymap(0, 'n', '<leader>r', ':FlutterRun<CR>', { noremap = true })
+        vim.api.nvim_buf_set_keymap(0, 'n', '<leader>R', ':FlutterRestart<CR>', { noremap = true })
+    end
+})

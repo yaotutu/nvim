@@ -22,7 +22,8 @@ return {
                         ["<C-d>"] = "preview_scrolling_down",
                     },
                 }
-            }
+            },
         })
+        require("telescope").load_extension("flutter")
     end
 }
