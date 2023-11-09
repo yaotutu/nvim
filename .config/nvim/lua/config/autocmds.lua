@@ -55,5 +55,6 @@ vim.api.nvim_create_autocmd('FileType', {
     callback = function()
         vim.api.nvim_buf_set_keymap(0, 'n', '<leader>r', ':FlutterRun<CR>', { noremap = true })
         vim.api.nvim_buf_set_keymap(0, 'n', '<leader>R', ':FlutterRestart<CR>', { noremap = true })
+        vim.api.nvim_buf_set_keymap(0, 'n', '<leader>c', '<cmd>Telescope flutter commands<CR>', { noremap = true })
     end
 })
