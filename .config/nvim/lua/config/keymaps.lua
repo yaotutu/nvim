@@ -73,12 +73,12 @@ map("i", "<C-l>", "<ESC>A", opt)
 ------------------------------------------------------------------
 -- 取消 s 默认功能
 -- map("n", "s", "", opt)
-map("n", "<leader>s-", ":vsp<CR>", opt)
-map("n", "<leader>s_", ":sp<CR>", opt)
+map("n", "<leader>w-", ":vsp<CR>", opt)
+map("n", "<leader>w_", ":sp<CR>", opt)
 -- 关闭当前
-map("n", "<leader>sc", "<C-w>c", opt)
+map("n", "<leader>wc", "<C-w>c", opt)
 -- 关闭其他
-map("n", "<leader>so", "<C-w>o", opt) -- close others
+map("n", "<leader>wo", "<C-w>o", opt) -- close others
 -- alt + hjkl  窗口之间跳转
 map("n", "<A-h>", "<C-w>h", opt)
 map("n", "<A-j>", "<C-w>j", opt)
