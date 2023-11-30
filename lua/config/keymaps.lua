@@ -120,6 +120,8 @@ map("n", '<leader>gg', ':LazyGit<CR>', opt)
 map("n", "zz", ":foldclose<CR>", opt)
 map("n", "Z", ":foldopen<CR>", opt)
 
+-- nvim-tree
+map("n", '<leader>e', ':NvimTreeToggle<CR>', opt)
 -- bufferline
 -- 左右Tab切换
 map("n", "<C-h>", ":BufferLineCyclePrev<CR>", opt)
@@ -218,7 +220,7 @@ vim.keymap.set('n', '<leader>gc', "<cmd>Telescope git_commits<cr>", opt)
 vim.keymap.set('n', '<leader>gs', "<cmd>Telescope git_status<cr>", opt)
 
 -- dap
-vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
+-- vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
 vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
 vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
 vim.keymap.set('n', '<F12>', function() require('dap').step_out() end)
