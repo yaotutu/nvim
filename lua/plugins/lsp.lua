@@ -28,7 +28,7 @@ return {
       require("mason-lspconfig").setup()
       -- 语言服务器
       require("plugins.lsp.lua-ls").setup()
-      require("plugins.lsp.tsserver").setup()
+      -- require("plugins.lsp.tsserver").setup()
       require("plugins.lsp.tailwindcss").setup()
       require("plugins.lsp.cssls").setup()
       require("plugins.lsp.emmet").setup()
@@ -37,4 +37,10 @@ return {
       require("plugins.lsp.gopls").setup()
     end,
   },
+  -- ts config 
+  {
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = {},
+  }
 }
