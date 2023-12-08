@@ -7,6 +7,9 @@
 * 插件依赖
 * nvim-spectre
   * brew install gnu-sed
+* telescope
+  * ripgrep
+
 
 # lsp
 * lsp install
