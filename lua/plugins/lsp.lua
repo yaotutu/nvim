@@ -10,7 +10,14 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
+      {
+        "williamboman/mason-lspconfig.nvim",
+        config = function()
+          require("mason-lspconfig").setup {
+            ensure_installed = { "lua_ls", "eslint" },
+          }
+        end
+      },
       "hrsh7th/cmp-nvim-lsp",
       {
         'j-hui/fidget.nvim',
@@ -37,7 +44,7 @@ return {
       require("plugins.lsp.gopls").setup()
     end,
   },
-  -- ts config 
+  -- ts config
   {
     "pmizio/typescript-tools.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
