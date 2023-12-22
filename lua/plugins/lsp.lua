@@ -1,23 +1,21 @@
 return {
-  {
-    "williamboman/mason-lspconfig.nvim",
-  },
+
   {
     "williamboman/mason.nvim",
+    opts = {}
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    config = function()
+      require("mason-lspconfig").setup {
+        ensure_installed = { "lua_ls", "eslint", "cssls", "emmet_ls", "volar", "marksman", "tailwindcss" },
+      }
+    end
   },
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      "mason.nvim",
-      {
-        "williamboman/mason-lspconfig.nvim",
-        config = function()
-          require("mason-lspconfig").setup {
-            ensure_installed = { "lua_ls", "eslint", "cssls", "emmet_ls", "volar", "marksman", "tailwindcss"},
-          }
-        end
-      },
       "hrsh7th/cmp-nvim-lsp",
       {
         'j-hui/fidget.nvim',
