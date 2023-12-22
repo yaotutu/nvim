@@ -13,13 +13,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end,
 })
 
--- Auto save on leaving insert mode
-vim.api.nvim_create_autocmd("InsertLeave", {
-    group = augroup("auto_save"),
-    callback = function()
-        vim.api.nvim_command("write")
-    end,
-})
 
 -- 回到上一次退出时编辑文件的位置
 vim.api.nvim_create_autocmd("BufReadPost", {
