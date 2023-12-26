@@ -62,8 +62,7 @@ return {
       "rafamadriz/friendly-snippets",
       config = function()
         require("luasnip.loaders.from_vscode").lazy_load()
-        print("load snippets")
-        print(vim.fn.stdpath("config") .. "/lua/snippets")
+        require("luasnip/loaders/from_vscode").load { paths = vim.fn.stdpath("config") .. "/lua/snippets" }
         require("luasnip").filetype_extend("typescript", { "javascript" })
         require("luasnip").filetype_extend("dart", { "flutter" })
         require("luasnip").filetype_extend("go", { "golang" })
