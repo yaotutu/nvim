@@ -31,11 +31,11 @@ return {
           ["<C-.>"] = cmp.mapping.complete(),
           ['<C-b>'] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
-          ["<CR>"] = cmp.mapping.confirm({ select = false }),           -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+          ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
           ["<S-CR>"] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Replace,
             select = true,
-          }),           -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+          }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         }),
         sources = cmp.config.sources({
           { name = "copilot", group_index = 2 },
@@ -62,12 +62,11 @@ return {
       "rafamadriz/friendly-snippets",
       config = function()
         require("luasnip.loaders.from_vscode").lazy_load()
-        require("luasnip.loaders.from_vscode").lazy_load({
-          paths = { "/Users/yaotutu/dotfiles/.config/nvim/lua/snippets" }
-        })
-        -- require("luasnip").filetype_extend("typescript", { "javascript" })
+        print("load snippets")
+        print(vim.fn.stdpath("config") .. "/lua/snippets")
+        require("luasnip").filetype_extend("typescript", { "javascript" })
         require("luasnip").filetype_extend("dart", { "flutter" })
-        -- require("luasnip").filetype_extend("go", { "golang" })
+        require("luasnip").filetype_extend("go", { "golang" })
       end,
     },
     opts = {
