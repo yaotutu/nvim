@@ -26,6 +26,11 @@ _G.Gstatus_timer:start(0, 2000, vim.schedule_wrap(update_gstatus))
 
 return {
   "nvim-lualine/lualine.nvim",
+  dependencies = {
+    { 'dokwork/lualine-ex' },
+    { 'nvim-lua/plenary.nvim' },
+    { 'kyazdani42/nvim-web-devicons' },
+  },
   event = "VeryLazy",
   opts = function()
     return {
@@ -36,12 +41,11 @@ return {
       },
       extensions = { "nvim-tree", "toggleterm" },
       sections = {
-        lualine_b = { 'branch', { function()
+        lualine_b = { 'ex.git.branch', { function()
           return gstatus.ahead .. ' ' .. gstatus.behind ..
               ''
         end }, 'diff', 'diagnostics' },
         lualine_c = {
-          "filename",
           {
             "lsp_progress",
             spinner_symbols = { " ", " ", " ", " ", " ", " " },
@@ -65,6 +69,10 @@ return {
           "encoding",
           "filetype",
         },
+        lualine_y = {
+          "ex.lsp.single",
+        },
+        lualine_z = { "ex.cwd" },
       },
     }
   end,
