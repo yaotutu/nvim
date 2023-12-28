@@ -217,6 +217,8 @@ vim.keymap.set('n', '<leader>fF', Util.telescope("files", { cwd = false }), opt)
 vim.keymap.set('n', '<leader>fr', "<cmd>Telescope oldfiles<cr>", opt)
 vim.keymap.set('n', '<leader>fR', Util.telescope("oldfiles", { cwd = vim.loop.cwd() }), opt)
 vim.keymap.set('n', '<leader>fp', "<cmd>Telescope projects<cr>", opt)
+-- flutter-tools
+vim.keymap.set('n', '<leader>fd', "<cmd>Telescope flutter commands <cr>", opt)
 -- git
 vim.keymap.set('n', '<leader>gc', "<cmd>Telescope git_commits<cr>", opt)
 vim.keymap.set('n', '<leader>gs', "<cmd>Telescope git_status<cr>", opt)

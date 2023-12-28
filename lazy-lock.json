@@ -54,7 +54,7 @@
   "project.nvim": { "branch": "main", "commit": "8c6bad7d22eef1b71144b401c9f74ed01526a4fb" },
   "sniprun": { "branch": "master", "commit": "639877399a23e375a8c07b75c14d017735eab7cb" },
   "telescope-dap.nvim": { "branch": "master", "commit": "4e2d5efb92062f0b865fe59b200b5ed7793833bf" },
-  "telescope.nvim": { "branch": "master", "commit": "c0ee29e8e4700ef49623d12ca3ffb8481c8d69f3" },
+  "telescope.nvim": { "branch": "master", "commit": "aacaa9cd031da83ce08d8fa5f19083d731f7f62c" },
   "todo-comments.nvim": { "branch": "main", "commit": "4a6737a8d70fe1ac55c64dfa47fcb189ca431872" },
   "toggleterm.nvim": { "branch": "main", "commit": "cbd041d91b90cd3c02df03fe6133208888f8e008" },
   "trouble.nvim": { "branch": "main", "commit": "f1168feada93c0154ede4d1fe9183bf69bac54ea" },
