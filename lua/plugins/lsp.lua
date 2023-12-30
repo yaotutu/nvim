@@ -2,15 +2,15 @@ return {
 
   {
     "williamboman/mason.nvim",
-    opts = {}
+    opts = {},
   },
   {
     "williamboman/mason-lspconfig.nvim",
     config = function()
-      require("mason-lspconfig").setup {
+      require("mason-lspconfig").setup({
         ensure_installed = { "lua_ls", "eslint", "cssls", "emmet_ls", "volar", "marksman", "tailwindcss" },
-      }
-    end
+      })
+    end,
   },
   {
     "neovim/nvim-lspconfig",
@@ -18,14 +18,14 @@ return {
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       {
-        'j-hui/fidget.nvim',
-        tag = 'legacy',
+        "j-hui/fidget.nvim",
+        tag = "legacy",
         config = function()
-          require("fidget").setup {
+          require("fidget").setup({
             -- options
-          }
+          })
         end,
-      }
+      },
     },
     config = function()
       -- 通用配置
@@ -46,6 +46,11 @@ return {
   {
     "pmizio/typescript-tools.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    opts = {},
-  }
+    config = function()
+      local projectType = require("util.tools").detectProjectType()
+      if projectType and projectType ~= "vue" then
+        require("typescript-tools").setup()
+      end
+    end,
+  },
 }
