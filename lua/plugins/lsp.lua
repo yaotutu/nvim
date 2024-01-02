@@ -48,8 +48,8 @@ return {
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     config = function()
       local projectType = require("util.tools").detectProjectType()
-      if projectType and projectType ~= "vue" then
-        require("typescript-tools").setup()
+      if projectType ~= "vue" then
+        require("typescript-tools").setup({})
       end
     end,
   },
