@@ -166,7 +166,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<space>f', function()
       vim.lsp.buf.format { async = true }
     end, opts)
-    vim.keymap.set("n", "gp", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", {noremap=true})
+    vim.keymap.set("n", "gp", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", { noremap = true })
   end,
 })
 vim.keymap.set("n", "<leader>nl", function()
@@ -224,7 +224,7 @@ vim.keymap.set('n', '<leader>gc', "<cmd>Telescope git_commits<cr>", opt)
 vim.keymap.set('n', '<leader>gs', "<cmd>Telescope git_status<cr>", opt)
 
 -- dap
--- vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
+vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
 vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
 vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
 vim.keymap.set('n', '<F12>', function() require('dap').step_out() end)
