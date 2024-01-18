@@ -222,6 +222,12 @@ vim.keymap.set('n', '<leader>fd', "<cmd>Telescope flutter commands <cr>", opt)
 -- git
 vim.keymap.set('n', '<leader>gc', "<cmd>Telescope git_commits<cr>", opt)
 vim.keymap.set('n', '<leader>gs', "<cmd>Telescope git_status<cr>", opt)
+-- undo tree
+vim.keymap.set('n', '<leader>fu', "<cmd>Telescope undo<cr>", opt)
+-- yanky
+vim.keymap.set('n', '<leader>fy', '<cmd>:lua require("telescope").extensions.yank_history.yank_history()<CR>', opt)
+
+
 
 -- dap
 vim.keymap.set('n', '<F5>', function() require('dap').continue() end)

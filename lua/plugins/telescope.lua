@@ -1,6 +1,9 @@
 return {
   'nvim-telescope/telescope.nvim',
-  dependencies = { 'nvim-lua/plenary.nvim' },
+  dependencies = {
+    'nvim-lua/plenary.nvim',
+    "debugloop/telescope-undo.nvim",
+  },
   cmd = "Telescope",
   config = function()
     require("telescope").setup({
@@ -26,5 +29,6 @@ return {
     })
     require("telescope").load_extension("flutter")
     require('telescope').load_extension('projects')
+    require("telescope").load_extension("undo")
   end
 }
