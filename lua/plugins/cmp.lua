@@ -9,7 +9,7 @@ return {
       "hrsh7th/cmp-path",
       "saadparwaiz1/cmp_luasnip",
       "onsails/lspkind.nvim",
-      "chrisgrieser/cmp_yanky"
+      "chrisgrieser/cmp_yanky",
     },
     opts = function()
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
@@ -30,7 +30,7 @@ return {
           -- ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           -- ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-.>"] = cmp.mapping.complete(),
-          ['<C-b>'] = cmp.mapping.complete(),
+          ["<C-b>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
           ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
           ["<S-CR>"] = cmp.mapping.confirm({
@@ -39,7 +39,7 @@ return {
           }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         }),
         sources = cmp.config.sources({
-          { name = "copilot",  group_index = 2 },
+          { name = "copilot", group_index = 2 },
           { name = "nvim_lsp" },
           { name = "luasnip" },
           { name = "buffer" },
@@ -52,7 +52,6 @@ return {
           },
         },
         sorting = defaults.sorting,
-
       }
     end,
   },
@@ -63,11 +62,14 @@ return {
     dependencies = {
       "rafamadriz/friendly-snippets",
       config = function()
-        require("luasnip.loaders.from_vscode").lazy_load()
-        require("luasnip/loaders/from_vscode").load { paths = vim.fn.stdpath("config") .. "/lua/snippets" }
+        require("luasnip/loaders/from_vscode").load({ paths = vim.fn.stdpath("config") .. "/lua/snippets" })
         require("luasnip").filetype_extend("typescript", { "javascript" })
         require("luasnip").filetype_extend("dart", { "flutter" })
         require("luasnip").filetype_extend("go", { "golang" })
+        --- lazy_load function must be called after filetype_extend
+        --- otherwise, the filetype_extend will not work
+        --- see https://github.com/L3MON4D3/LuaSnip/issues/1079
+        require("luasnip.loaders.from_vscode").lazy_load()
       end,
     },
     opts = {
@@ -90,8 +92,9 @@ return {
     },
     config = function(_, opts)
       -- 代码片段时的select模式关闭p的粘贴功能
-      vim.keymap.set("s", "p", function() vim.api.nvim_feedkeys("p", "n", false) end,
-        { silent = true, remap = false, desc = "Don't paste in select mode" })
-    end
-  }
+      vim.keymap.set("s", "p", function()
+        vim.api.nvim_feedkeys("p", "n", false)
+      end, { silent = true, remap = false, desc = "Don't paste in select mode" })
+    end,
+  },
 }
