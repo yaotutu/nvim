@@ -39,9 +39,9 @@ return {
           }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         }),
         sources = cmp.config.sources({
-          { name = "copilot", group_index = 2 },
+          { name = "luasnip",  group_index = 1 },
+          { name = "copilot",  group_index = 2 },
           { name = "nvim_lsp" },
-          { name = "luasnip" },
           { name = "buffer" },
           { name = "path" },
           { name = "cmp_yanky" },
