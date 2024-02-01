@@ -112,8 +112,6 @@ map("n", "<C-s>", "<cmd>w<cr><esc>", opt)
 map("s", "<C-s>", "<cmd>w<cr><esc>", opt)
 
 --------------------------------------------------------------------
--- 插件快捷键
-local pluginKeys = {}
 -- lazygit
 map("n", '<leader>gg', ':LazyGit<CR>', opt)
 -- treesitter 折叠
@@ -254,6 +252,3 @@ vim.keymap.set('n', '<Leader>ds', function()
   local widgets = require('dap.ui.widgets')
   widgets.centered_float(widgets.scopes)
 end)
-
-
-return pluginKeys

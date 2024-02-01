@@ -23,6 +23,7 @@
   "indent-blankline.nvim": { "branch": "master", "commit": "12e92044d313c54c438bd786d11684c88f6f78cd" },
   "lazy.nvim": { "branch": "main", "commit": "aedcd79811d491b60d0a6577a9c1701063c2a609" },
   "lazygit.nvim": { "branch": "main", "commit": "1e08e3f5ac1152339690140e61a4a32b3bdc7de5" },
+  "legendary.nvim": { "branch": "master", "commit": "234e2ef8dec65db153c63a8b310c74155bb93ee7" },
   "lspkind.nvim": { "branch": "master", "commit": "1735dd5a5054c1fb7feaf8e8658dbab925f4f0cf" },
   "lualine-ex": { "branch": "main", "commit": "8de69fdb5f5f63bb60200503185dda9f3eb1dacf" },
   "lualine-so-fancy.nvim": { "branch": "main", "commit": "21284504fed2776668fdea8743a528774de5d2e1" },
