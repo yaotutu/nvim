@@ -9,6 +9,7 @@ local function my_on_attach(bufnr)
 
   -- remove a default
   vim.keymap.del('n', 's', { buffer = bufnr })
+  vim.keymap.del('n', '<C-K>',{ buffer = bufnr })
 end
 
 

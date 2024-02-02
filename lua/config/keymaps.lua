@@ -111,9 +111,15 @@ map("v", "<C-s>", "<cmd>w<cr><esc>", opt)
 map("n", "<C-s>", "<cmd>w<cr><esc>", opt)
 map("s", "<C-s>", "<cmd>w<cr><esc>", opt)
 
+--System clipboard
+map("v", "<leader>y", [["+y]],opt)
+map("n", "<leader>y", [["+y]],opt)
+map("n", "<leader>Y", [["+Y]],opt)
+map("v", "<leader>p", [["+p]],opt)
+map("n", "<leader>p", [["+p]],opt)
+map("n", "<leader>P", [["+P]],opt)
+
 --------------------------------------------------------------------
--- lazygit
-map("n", '<leader>gg', ':LazyGit<CR>', opt)
 -- treesitter 折叠
 map("n", "zz", ":foldclose<CR>", opt)
 map("n", "Z", ":foldopen<CR>", opt)
