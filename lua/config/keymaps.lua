@@ -87,23 +87,29 @@ map("n", "<A-l>", "<C-w>l", opt)
 
 
 -- 左右比例控制
-map("n", "<leader>wh", ":vertical resize -2<CR>", opt)
-map("n", "<leader>wl", ":vertical resize +2<CR>", opt)
-map("n", "<leader>wH", ":vertical resize -10<CR>", opt)
-map("n", "<leader>wL", ":vertical resize +10<CR>", opt)
+-- map("n", "<leader>wh", ":vertical resize -2<CR>", opt)
+-- map("n", "<leader>wl", ":vertical resize +2<CR>", opt)
+-- map("n", "<leader>wH", ":vertical resize -10<CR>", opt)
+-- map("n", "<leader>wL", ":vertical resize +10<CR>", opt)
 -- 上下比例
-map("n", "<leader>wk", ":resize +2<CR>", opt)
-map("n", "<leader>wj", ":resize -2<CR>", opt)
-map("n", "<leader>wK", ":resize +10<CR>", opt)
-map("n", "<leader>wJ", ":resize -10<CR>", opt)
+-- map("n", "<leader>wk", ":resize +2<CR>", opt)
+-- map("n", "<leader>wj", ":resize -2<CR>", opt)
+-- map("n", "<leader>wK", ":resize +10<CR>", opt)
+-- map("n", "<leader>wJ", ":resize -10<CR>", opt)
 -- 相等比例
-map("n", "<leader>w=", "<C-w>=", opt)
+-- map("n", "<leader>w=", "<C-w>=", opt)
+-- 切换窗口
+map("n", "<leader>ww", "<cmd>lua require('nvim-window').pick()<cr>", opt)
 -- 水平分割终端
 map("n", "<Leader>t-", ":ToggleTerm direction=vertical<CR>", opt)
 -- 垂直分割终端
-map("n", "<Leader>t_", ":ToggleTerm direction=horizontal<CR>", opt)
+map("n", "<Leader>tt", ":ToggleTerm direction=horizontal<CR>", opt)
+map("n", "<Leader>t1", ":ToggleTerm  1 <CR> ", opt)
+map("n", "<Leader>t2", ":ToggleTerm  2 <CR>", opt)
+map("n", "<Leader>t3", ":ToggleTerm  3 <CR>", opt)
+map("n", "<Leader>t4", ":ToggleTerm  4 <CR>", opt)
 map("n", "<leader>tf", ":ToggleTerm direction=float<CR>", opt)
--- 退出终端
+-- 退出终端inert mode
 map('t', ',,', '<C-\\><C-n>', opt)
 -- save file
 map("i", "<C-s>", "<cmd>w<cr><esc>", opt)
@@ -112,12 +118,12 @@ map("n", "<C-s>", "<cmd>w<cr><esc>", opt)
 map("s", "<C-s>", "<cmd>w<cr><esc>", opt)
 
 --System clipboard
-map("v", "<leader>y", [["+y]],opt)
-map("n", "<leader>y", [["+y]],opt)
-map("n", "<leader>Y", [["+Y]],opt)
-map("v", "<leader>p", [["+p]],opt)
-map("n", "<leader>p", [["+p]],opt)
-map("n", "<leader>P", [["+P]],opt)
+map("v", "<leader>y", [["+y]], opt)
+map("n", "<leader>y", [["+y]], opt)
+map("n", "<leader>Y", [["+Y]], opt)
+map("v", "<leader>p", [["+p]], opt)
+map("n", "<leader>p", [["+p]], opt)
+map("n", "<leader>P", [["+P]], opt)
 
 --------------------------------------------------------------------
 -- treesitter 折叠
@@ -168,7 +174,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, opts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
     vim.keymap.set('n', '<space>f', function()
-        require("conform").format({ async = true, lsp_fallback = true })
+      require("conform").format({ async = true, lsp_fallback = true })
     end, opts)
     vim.keymap.set("n", "gp", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", { noremap = true })
   end,
