@@ -15,10 +15,21 @@ return {
     opts = function()
         local opts = {
             bottom = {
+                { ft = "qf", title = "QuickFix" },
                 {
-                    title = "Spectre",
-                    ft = "spectre_panel",
-                    size = { height = 0.2 }
+                    ft = "noice",
+                    size = { height = 0.2 },
+                    filter = function(buf, win)
+                        return vim.api.nvim_win_get_config(win).relative == ""
+                    end,
+                },
+                {
+                    ft = "lazyterm",
+                    title = "LazyTerm",
+                    size = { height = 0.2 },
+                    filter = function(buf)
+                        return not vim.b[buf].lazyterm_cmd
+                    end,
                 },
                 "Trouble",
                 {
@@ -27,13 +38,16 @@ return {
                         return vim.api.nvim_win_get_config(win).relative == ""
                     end,
                 },
+                { ft = "qf", title = "QuickFix" },
                 {
-                    ft = "noice",
-                    size = { height = 0.2 },
-                    filter = function(buf, win)
-                        return vim.api.nvim_win_get_config(win).relative == ""
+                    ft = "help",
+                    size = { height = 20 },
+                    -- don't open help files in edgy that we're editing
+                    filter = function(buf)
+                        return vim.bo[buf].buftype == "help"
                     end,
                 },
+                { title = "Spectre", ft = "spectre_panel", size = { height = 0.2 } },
                 {
                     ft = "toggleterm",
                     size = { height = 0.2 },
@@ -44,11 +58,11 @@ return {
             },
             keys = {
                 -- increase width
-                ["<leader>wl"] = function(win)
+                ["<leader>wh"] = function(win)
                     win:resize("width", 2)
                 end,
                 -- decrease width
-                ["<leader>wh"] = function(win)
+                ["<leader>wl"] = function(win)
                     win:resize("width", -2)
                 end,
                 -- increase height
@@ -63,6 +77,7 @@ return {
                     win.view.edgebar:equalize()
                 end,
             },
+            fix_win_height = vim.fn.has("nvim-0.10.0") == 0,
         }
 
         return opts

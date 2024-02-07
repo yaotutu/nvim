@@ -103,12 +103,12 @@ map("n", "<leader>ww", "<cmd>lua require('nvim-window').pick()<cr>", opt)
 -- 水平分割终端
 map("n", "<Leader>t-", ":ToggleTerm direction=vertical<CR>", opt)
 -- 垂直分割终端
-map("n", "<Leader>tt", ":ToggleTerm direction=horizontal<CR>", opt)
+map("n", "<Leader>tt", ":ToggleTerm 1  direction=horizontal<CR>", opt)
 map("n", "<Leader>t1", ":ToggleTerm  1 <CR> ", opt)
 map("n", "<Leader>t2", ":ToggleTerm  2 <CR>", opt)
 map("n", "<Leader>t3", ":ToggleTerm  3 <CR>", opt)
 map("n", "<Leader>t4", ":ToggleTerm  4 <CR>", opt)
-map("n", "<leader>tf", ":ToggleTerm direction=float<CR>", opt)
+map("n", "<leader>tf", ":ToggleTerm 9 direction=float<CR>", opt)
 -- 退出终端inert mode
 map('t', ',,', '<C-\\><C-n>', opt)
 -- save file
@@ -151,6 +151,11 @@ map("n", "<C-_>", "gcc", { noremap = false })
 map("v", "<C-_>", "gcc", { noremap = false })
 
 -- lsp 快捷键设置
+
+vim.keymap.set('n', 'gf', vim.diagnostic.open_float)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set('n', 'gl', vim.diagnostic.setloclist)
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)
