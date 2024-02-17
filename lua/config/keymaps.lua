@@ -233,6 +233,8 @@ vim.keymap.set('n', '<leader>fu', "<cmd>Telescope undo<cr>", opt)
 -- lsp
 vim.keymap.set('n', '<leader>fd', "<cmd>lua require'telescope.builtin'.diagnostics() <CR>", opt)
 vim.keymap.set('n', '<leader>fc', "<cmd>lua require'telescope.builtin'.diagnostics({bufnr=0}) <CR>", opt)
+-- todo comments 
+vim.keymap.set('n', '<leader>ft', "<cmd>TodoTelescope <CR>", opt)
 
 
 
