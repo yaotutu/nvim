@@ -202,13 +202,6 @@ vim.api.nvim_set_keymap('v', 'r', '<Plug>SnipRun', { silent = true })
 vim.api.nvim_set_keymap('n', '<leader>rx', '<Plug>SnipClose', { silent = true })
 vim.api.nvim_set_keymap("n", "<leader>r", "ggVG<leader><Plug>SnipRun", { noremap = true })
 
--- trouble
-vim.keymap.set("n", "<leader>xx", function() require("trouble").open() end)
-vim.keymap.set("n", "<leader>xw", function() require("trouble").open("workspace_diagnostics") end)
-vim.keymap.set("n", "<leader>xd", function() require("trouble").open("document_diagnostics") end)
-vim.keymap.set("n", "<leader>xq", function() require("trouble").open("quickfix") end)
-vim.keymap.set("n", "<leader>xl", function() require("trouble").open("loclist") end)
-vim.keymap.set("n", "gR", function() require("trouble").open("lsp_references") end)
 
 -- spectre
 vim.keymap.set('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
@@ -232,15 +225,14 @@ vim.keymap.set('n', '<leader>fF', Util.telescope("files", { cwd = false }), opt)
 vim.keymap.set('n', '<leader>fr', "<cmd>Telescope oldfiles<cr>", opt)
 vim.keymap.set('n', '<leader>fR', Util.telescope("oldfiles", { cwd = vim.loop.cwd() }), opt)
 vim.keymap.set('n', '<leader>fp', "<cmd>Telescope projects<cr>", opt)
--- flutter-tools
-vim.keymap.set('n', '<leader>fd', "<cmd>Telescope flutter commands <cr>", opt)
 -- git
 vim.keymap.set('n', '<leader>gc', "<cmd>Telescope git_commits<cr>", opt)
 vim.keymap.set('n', '<leader>gs', "<cmd>Telescope git_status<cr>", opt)
 -- undo tree
 vim.keymap.set('n', '<leader>fu', "<cmd>Telescope undo<cr>", opt)
--- yanky
-vim.keymap.set('n', '<leader>fy', '<cmd>:lua require("telescope").extensions.yank_history.yank_history()<CR>', opt)
+-- lsp
+vim.keymap.set('n', '<leader>fd', "<cmd>lua require'telescope.builtin'.diagnostics() <CR>", opt)
+vim.keymap.set('n', '<leader>fc', "<cmd>lua require'telescope.builtin'.diagnostics({bufnr=0}) <CR>", opt)
 
 
 

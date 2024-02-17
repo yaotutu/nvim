@@ -9,7 +9,6 @@ return {
       "hrsh7th/cmp-path",
       "saadparwaiz1/cmp_luasnip",
       "onsails/lspkind.nvim",
-      "chrisgrieser/cmp_yanky",
     },
     opts = function()
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
@@ -44,7 +43,6 @@ return {
           { name = "nvim_lsp" },
           { name = "buffer" },
           { name = "path" },
-          { name = "cmp_yanky" },
         }),
         experimental = {
           ghost_text = {
