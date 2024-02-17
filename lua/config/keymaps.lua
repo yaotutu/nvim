@@ -1,5 +1,8 @@
 local Util = require("util")
 
+-- disable default keymap
+vim.api.nvim_set_keymap('n', 'q', '<Nop>', { silent = true })
+
 -- 测试函数,用于测试当前文件是否被加载
 -- vim.notify("Hello, world!", vim.log.INFO, { title = "Notification", timeout = 3000 })
 
