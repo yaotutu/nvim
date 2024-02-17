@@ -87,17 +87,17 @@ map("n", "<A-l>", "<C-w>l", opt)
 
 
 -- 左右比例控制
--- map("n", "<leader>wh", ":vertical resize -2<CR>", opt)
--- map("n", "<leader>wl", ":vertical resize +2<CR>", opt)
--- map("n", "<leader>wH", ":vertical resize -10<CR>", opt)
--- map("n", "<leader>wL", ":vertical resize +10<CR>", opt)
+map("n", "<leader>wh", ":vertical resize -2<CR>", opt)
+map("n", "<leader>wl", ":vertical resize +2<CR>", opt)
+map("n", "<leader>wH", ":vertical resize -10<CR>", opt)
+map("n", "<leader>wL", ":vertical resize +10<CR>", opt)
 -- 上下比例
--- map("n", "<leader>wk", ":resize +2<CR>", opt)
--- map("n", "<leader>wj", ":resize -2<CR>", opt)
--- map("n", "<leader>wK", ":resize +10<CR>", opt)
--- map("n", "<leader>wJ", ":resize -10<CR>", opt)
+map("n", "<leader>wk", ":resize +2<CR>", opt)
+map("n", "<leader>wj", ":resize -2<CR>", opt)
+map("n", "<leader>wK", ":resize +10<CR>", opt)
+map("n", "<leader>wJ", ":resize -10<CR>", opt)
 -- 相等比例
--- map("n", "<leader>w=", "<C-w>=", opt)
+map("n", "<leader>w=", "<C-w>=", opt)
 -- 切换窗口
 map("n", "<leader>ww", "<cmd>lua require('nvim-window').pick()<cr>", opt)
 -- 水平分割终端
