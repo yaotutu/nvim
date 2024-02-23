@@ -75,6 +75,8 @@ function M.detectProjectType()
         return "vue"
       elseif packageJson.dependencies and packageJson.dependencies.nestjs then
         return "nestjs"
+      elseif packageJson.dependencies and packageJson.dependencies["@biomejs/biome"] then
+        return "biome"
       end
       return ""
     end
@@ -94,6 +96,51 @@ function M.detectProjectType()
   end
 
   return nil
+end
+
+-- 检查指定依赖是否存在
+local function checkDependency(packageJson, dependency)
+  if packageJson.dependencies and packageJson.dependencies[dependency] then
+    return true
+  end
+  if packageJson.devDependencies and packageJson.devDependencies[dependency] then
+    return true
+  end
+  return false
+end
+
+-- 获取 package.json 的内容
+local function getPackageJson()
+  local currentDirectory = getCurrentDirectory()
+
+  -- Look for package.json file in the root directory
+  local rootDirectory = currentDirectory
+  while rootDirectory ~= "/" do
+    local packageJsonPath = rootDirectory .. "/package.json"
+    local packageJsonFile = io.open(packageJsonPath, "r")
+    if packageJsonFile then
+      packageJsonFile:close()
+
+      -- Read the content of package.json
+      local packageJson = vim.fn.json_decode(vim.fn.readfile(packageJsonPath))
+
+      return packageJson
+    end
+
+    rootDirectory = vim.fn.fnamemodify(rootDirectory, ":h")
+  end
+
+  return nil
+end
+
+-- 判断指定依赖是否存在于 package.json 文件中
+function M.checkDependencyInPackageJson(dependency)
+  local packageJson = getPackageJson()
+  if packageJson then
+    return checkDependency(packageJson, dependency)
+  end
+
+  return false
 end
 
 return M
