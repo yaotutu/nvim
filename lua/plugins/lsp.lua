@@ -7,8 +7,14 @@ return {
     "williamboman/mason-lspconfig.nvim",
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "eslint", "cssls", "emmet_ls", "volar", "marksman", "tailwindcss", "typos_lsp" },
+        ensure_installed = { "lua_ls", "eslint", "cssls", "emmet_ls", "volar", "marksman", "tailwindcss", "typos_lsp","biomejs","tsserver" },
       })
+    end,
+  },
+  {
+    "dmmulroy/ts-error-translator.nvim",
+    config = function()
+      require("ts-error-translator").setup()
     end,
   },
   {
@@ -38,18 +44,6 @@ return {
       -- 通用配置
       require("mason").setup()
       require("mason-lspconfig").setup()
-
-      -- 语言服务器
-      -- require("plugins.lsp.lua-ls").setup()
-      -- require("plugins.lsp.tsserver").setup()
-      -- require("plugins.lsp.tailwindcss").setup()
-      -- require("plugins.lsp.cssls").setup()
-      -- require("plugins.lsp.emmet").setup()
-      -- require("plugins.lsp.marksman").setup()
-      -- require("plugins.lsp.volar").setup()
-      -- require("plugins.lsp.gopls").setup()
-      -- require("plugins.lsp.jsonls").setup()
-      -- require("lspconfig").biome.setup({})
       -- 获取 Lua 配置文件目录
       local config_dir = vim.fn.stdpath("config")
       -- 构建完整路径
@@ -88,7 +82,17 @@ return {
   -- ts config
   {
     "pmizio/typescript-tools.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "neovim/nvim-lspconfig",
+      enabled = false,
+      {
+        "dmmulroy/ts-error-translator.nvim",
+        config = function()
+          require("ts-error-translator").setup()
+        end,
+      },
+    },
     config = function()
       local projectType = require("util.tools").detectProjectType()
       if projectType ~= "vue" then
