@@ -7,7 +7,18 @@ return {
     "williamboman/mason-lspconfig.nvim",
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "eslint", "cssls", "emmet_ls", "volar", "marksman", "tailwindcss", "typos_lsp","biomejs","tsserver" },
+        ensure_installed = {
+          "lua_ls",
+          "eslint",
+          "cssls",
+          "emmet_ls",
+          "volar",
+          "marksman",
+          "tailwindcss",
+          "typos_lsp",
+          "biomejs",
+          "tsserver",
+        },
       })
     end,
   },
@@ -76,49 +87,6 @@ return {
       for _, plugin in ipairs(lsp_plugins) do
         local lsp_module = string.format("plugins.lsp.%s", plugin)
         require(lsp_module).setup()
-      end
-    end,
-  },
-  -- ts config
-  {
-    "pmizio/typescript-tools.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "neovim/nvim-lspconfig",
-      enabled = false,
-      {
-        "dmmulroy/ts-error-translator.nvim",
-        config = function()
-          require("ts-error-translator").setup()
-        end,
-      },
-    },
-    config = function()
-      local projectType = require("util.tools").detectProjectType()
-      if projectType ~= "vue" then
-        require("typescript-tools").setup({
-          on_attach = function(client, bufnr)
-            client.server_capabilities.documentFormattingProvider = false
-            client.server_capabilities.documentRangeFormattingProvider = false
-
-            if vim.lsp.inlay_hint then
-              vim.lsp.inlay_hint.enable(bufnr, false)
-            end
-          end,
-          settings = {
-            tsserver_file_preferences = {
-              -- Inlay Hints
-              includeInlayParameterNameHints = "all",
-              includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-              includeInlayFunctionParameterTypeHints = true,
-              includeInlayVariableTypeHints = true,
-              includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-              includeInlayPropertyDeclarationTypeHints = true,
-              includeInlayFunctionLikeReturnTypeHints = true,
-              includeInlayEnumMemberValueHints = true,
-            },
-          },
-        })
       end
     end,
   },
