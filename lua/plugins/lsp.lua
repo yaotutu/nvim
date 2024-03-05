@@ -16,7 +16,7 @@ return {
           "marksman",
           "tailwindcss",
           "typos_lsp",
-          "biomejs",
+          "biome",
           "tsserver",
         },
       })

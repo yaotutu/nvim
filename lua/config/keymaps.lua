@@ -1,7 +1,8 @@
 local Util = require("util")
+local Tools = require("util.tools")
 
 -- disable default keymap
-vim.api.nvim_set_keymap('n', 'q', '<Nop>', { silent = true })
+vim.api.nvim_set_keymap("n", "q", "<Nop>", { silent = true })
 
 -- 测试函数,用于测试当前文件是否被加载
 -- vim.notify("Hello, world!", vim.log.INFO, { title = "Notification", timeout = 3000 })
@@ -34,7 +35,6 @@ map("n", "g_", "$", opt)
 -- 命令行下 Ctrl+j/k  上一个下一个
 map("c", "<C-j>", "<C-n>", { noremap = false })
 map("c", "<C-k>", "<C-p>", { noremap = false })
-
 
 -- fix :set wrap
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -88,7 +88,6 @@ map("n", "<A-j>", "<C-w>j", opt)
 map("n", "<A-k>", "<C-w>k", opt)
 map("n", "<A-l>", "<C-w>l", opt)
 
-
 -- 左右比例控制
 map("n", "<leader>wh", ":vertical resize -2<CR>", opt)
 map("n", "<leader>wl", ":vertical resize +2<CR>", opt)
@@ -113,7 +112,7 @@ map("n", "<Leader>t3", ":ToggleTerm  3 <CR>", opt)
 map("n", "<Leader>t4", ":ToggleTerm  4 <CR>", opt)
 map("n", "<leader>tf", ":ToggleTerm 9 direction=float<CR>", opt)
 -- 退出终端inert mode
-map('t', ',,', '<C-\\><C-n>', opt)
+map("t", ",,", "<C-\\><C-n>", opt)
 -- save file
 map("i", "<C-s>", "<cmd>w<cr><esc>", opt)
 map("v", "<C-s>", "<cmd>w<cr><esc>", opt)
@@ -134,7 +133,7 @@ map("n", "zz", ":foldclose<CR>", opt)
 map("n", "Z", ":foldopen<CR>", opt)
 
 -- nvim-tree
-map("n", '<leader>e', ':NvimTreeToggle<CR>', opt)
+map("n", "<leader>e", ":NvimTreeToggle<CR>", opt)
 -- bufferline
 -- 左右Tab切换
 map("n", "<C-h>", ":BufferLineCyclePrev<CR>", opt)
@@ -155,33 +154,33 @@ map("v", "<C-_>", "gcc", { noremap = false })
 
 -- lsp 快捷键设置
 
-vim.keymap.set('n', 'gf', vim.diagnostic.open_float)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', 'gl', vim.diagnostic.setloclist)
-vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+vim.keymap.set("n", "gf", vim.diagnostic.open_float)
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+vim.keymap.set("n", "gl", vim.diagnostic.setloclist)
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
   callback = function(ev)
     -- Enable completion triggered by <c-x><c-o>
-    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+    vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
     -- Buffer local mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local opts = { buffer = ev.buf }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', 'gh', vim.lsp.buf.hover, opts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', 'gk', vim.lsp.buf.signature_help, opts)
-    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
-    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
-    vim.keymap.set('n', '<space>wl', function()
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "gh", vim.lsp.buf.hover, opts)
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+    vim.keymap.set("n", "gk", vim.lsp.buf.signature_help, opts)
+    vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
+    vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
+    vim.keymap.set("n", "<space>wl", function()
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, opts)
-    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
-    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-    vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-    vim.keymap.set('n', '<space>f', function()
+    vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
+    vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
+    vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, opts)
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+    vim.keymap.set("n", "<space>f", function()
       require("conform").format({ async = true, lsp_fallback = true })
     end, opts)
     vim.keymap.set("n", "gp", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", { noremap = true })
@@ -201,68 +200,84 @@ vim.keymap.set("n", "<leader>nt", function()
 end)
 
 -- SnipRun
-vim.api.nvim_set_keymap('v', 'r', '<Plug>SnipRun', { silent = true })
-vim.api.nvim_set_keymap('n', '<leader>rx', '<Plug>SnipClose', { silent = true })
+vim.api.nvim_set_keymap("v", "r", "<Plug>SnipRun", { silent = true })
+vim.api.nvim_set_keymap("n", "<leader>rx", "<Plug>SnipClose", { silent = true })
 vim.api.nvim_set_keymap("n", "<leader>r", "ggVG<leader><Plug>SnipRun", { noremap = true })
 
-
 -- spectre
-vim.keymap.set('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
-  desc = "Toggle Spectre"
+vim.keymap.set("n", "<leader>S", '<cmd>lua require("spectre").toggle()<CR>', {
+  desc = "Toggle Spectre",
 })
-vim.keymap.set('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
-  desc = "Search current word"
+vim.keymap.set("n", "<leader>sw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
+  desc = "Search current word",
 })
-vim.keymap.set('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>', {
-  desc = "Search current word"
+vim.keymap.set("v", "<leader>sw", '<esc><cmd>lua require("spectre").open_visual()<CR>', {
+  desc = "Search current word",
 })
-vim.keymap.set('n', '<leader>sp', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
-  desc = "Search on current file"
+vim.keymap.set("n", "<leader>sp", '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
+  desc = "Search on current file",
 })
 
 -- telescope
 -- vim.keymap.set('n', '<leader>ff', "<cmd>Telescope live_grep<cr>", opt)
-vim.keymap.set('n', '<leader>fb', "<cmd>Telescope buffers<cr>", opt)
-vim.keymap.set('n', '<leader>ff', Util.telescope("files"), opt)
-vim.keymap.set('n', '<leader>fF', Util.telescope("files", { cwd = false }), opt)
-vim.keymap.set('n', '<leader>fr', "<cmd>Telescope oldfiles<cr>", opt)
-vim.keymap.set('n', '<leader>fR', Util.telescope("oldfiles", { cwd = vim.loop.cwd() }), opt)
-vim.keymap.set('n', '<leader>fp', "<cmd>Telescope projects<cr>", opt)
+vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", opt)
+vim.keymap.set("n", "<leader>ff", Util.telescope("files"), opt)
+vim.keymap.set("n", "<leader>fF", Util.telescope("files", { cwd = false }), opt)
+vim.keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", opt)
+vim.keymap.set("n", "<leader>fR", Util.telescope("oldfiles", { cwd = vim.loop.cwd() }), opt)
+vim.keymap.set("n", "<leader>fp", "<cmd>Telescope projects<cr>", opt)
 -- git
-vim.keymap.set('n', '<leader>gc', "<cmd>Telescope git_commits<cr>", opt)
-vim.keymap.set('n', '<leader>gs', "<cmd>Telescope git_status<cr>", opt)
+vim.keymap.set("n", "<leader>gc", "<cmd>Telescope git_commits<cr>", opt)
+vim.keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<cr>", opt)
 -- undo tree
-vim.keymap.set('n', '<leader>fu', "<cmd>Telescope undo<cr>", opt)
+vim.keymap.set("n", "<leader>fu", "<cmd>Telescope undo<cr>", opt)
 -- lsp
-vim.keymap.set('n', '<leader>fd', "<cmd>lua require'telescope.builtin'.diagnostics() <CR>", opt)
-vim.keymap.set('n', '<leader>fc', "<cmd>lua require'telescope.builtin'.diagnostics({bufnr=0}) <CR>", opt)
--- todo comments 
-vim.keymap.set('n', '<leader>ft', "<cmd>TodoTelescope <CR>", opt)
-
-
+vim.keymap.set("n", "<leader>fd", "<cmd>lua require'telescope.builtin'.diagnostics() <CR>", opt)
+vim.keymap.set("n", "<leader>fc", "<cmd>lua require'telescope.builtin'.diagnostics({bufnr=0}) <CR>", opt)
+-- todo comments
+vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope <CR>", opt)
+--- toggle copilot
+vim.api.nvim_set_keymap("n", "<Leader>tc", "<Cmd>lua require('util.tools').toggle_copilot() <CR>", { noremap = true, silent = true })
 
 -- dap
-vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
-vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
-vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
-vim.keymap.set('n', '<F12>', function() require('dap').step_out() end)
-vim.keymap.set('n', '<Leader>b', function() require('dap').toggle_breakpoint() end)
-vim.keymap.set('n', '<Leader>B', function() require('dap').set_breakpoint() end)
-vim.keymap.set('n', '<Leader>lp',
-  function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
-vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end)
-vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
-vim.keymap.set({ 'n', 'v' }, '<Leader>dh', function()
-  require('dap.ui.widgets').hover()
+vim.keymap.set("n", "<F5>", function()
+  require("dap").continue()
 end)
-vim.keymap.set({ 'n', 'v' }, '<Leader>dp', function()
-  require('dap.ui.widgets').preview()
+vim.keymap.set("n", "<F10>", function()
+  require("dap").step_over()
 end)
-vim.keymap.set('n', '<Leader>df', function()
-  local widgets = require('dap.ui.widgets')
+vim.keymap.set("n", "<F11>", function()
+  require("dap").step_into()
+end)
+vim.keymap.set("n", "<F12>", function()
+  require("dap").step_out()
+end)
+vim.keymap.set("n", "<Leader>b", function()
+  require("dap").toggle_breakpoint()
+end)
+vim.keymap.set("n", "<Leader>B", function()
+  require("dap").set_breakpoint()
+end)
+vim.keymap.set("n", "<Leader>lp", function()
+  require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
+end)
+vim.keymap.set("n", "<Leader>dr", function()
+  require("dap").repl.open()
+end)
+vim.keymap.set("n", "<Leader>dl", function()
+  require("dap").run_last()
+end)
+vim.keymap.set({ "n", "v" }, "<Leader>dh", function()
+  require("dap.ui.widgets").hover()
+end)
+vim.keymap.set({ "n", "v" }, "<Leader>dp", function()
+  require("dap.ui.widgets").preview()
+end)
+vim.keymap.set("n", "<Leader>df", function()
+  local widgets = require("dap.ui.widgets")
   widgets.centered_float(widgets.frames)
 end)
-vim.keymap.set('n', '<Leader>ds', function()
-  local widgets = require('dap.ui.widgets')
+vim.keymap.set("n", "<Leader>ds", function()
+  local widgets = require("dap.ui.widgets")
   widgets.centered_float(widgets.scopes)
 end)
