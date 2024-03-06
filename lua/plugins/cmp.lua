@@ -9,12 +9,29 @@ return {
       "hrsh7th/cmp-path",
       "saadparwaiz1/cmp_luasnip",
       "onsails/lspkind.nvim",
+      {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        config = function()
+          require("copilot").setup({
+            suggestion = { enabled = false },
+            panel = { enabled = false },
+          })
+        end,
+      },
+      {
+        "zbirenbaum/copilot-cmp",
+        config = function()
+          require("copilot_cmp").setup()
+        end,
+      },
     },
-    opts = function()
+    config = function()
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
       local cmp = require("cmp")
       local defaults = require("cmp.config.default")()
-      return {
+      require("cmp").setup({
         completion = {
           completeopt = "menu,menuone,noinsert",
         },
@@ -38,19 +55,16 @@ return {
           }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         }),
         sources = cmp.config.sources({
-          { name = "luasnip",  group_index = 1 },
-          { name = "copilot",  group_index = 2 },
-          { name = "nvim_lsp" },
-          { name = "buffer" },
-          { name = "path" },
+          { name = "luasnip", group_index = 1, priority = 100 },
+          { name = "copilot", group_index = 2, priority = 20 },
+          { name = "nvim_lsp", group_index = 2 },
+          { name = "buffer", group_index = 2 },
+          { name = "path", group_index = 2 },
         }),
         experimental = {
-          ghost_text = {
-            hl_group = "CmpGhostText",
-          },
+          ghost_text = false,
         },
-        sorting = defaults.sorting,
-      }
+      })
     end,
   },
 
