@@ -1,0 +1,9 @@
+[default.extend-words]
+# Don't correct the surname "Teh"
+teh = "teh"
+noice = "noice"
+
+
+
+
+
