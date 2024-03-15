@@ -80,6 +80,8 @@ map("n", "<leader>w-", ":vsp<CR>", opt)
 map("n", "<leader>w_", ":sp<CR>", opt)
 -- 关闭当前
 map("n", "<leader>wc", "<C-w>c", opt)
+map("n", "<leader>wf", "<Cmd>lua require('util.tools').close_all_float_windows() <CR>", opt)
+
 -- 关闭其他
 map("n", "<leader>wo", "<C-w>o", opt) -- close others
 -- alt + hjkl  窗口之间跳转
@@ -164,25 +166,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- Enable completion triggered by <c-x><c-o>
     vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
     -- Buffer local mappings.
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
     local opts = { buffer = ev.buf, silent = true }
-    vim.keymap.set("n", "gD", ":Lspsaga peek_type_definition<CR>", opts)
-    vim.keymap.set("n", "gd", ":Lspsaga peek_definition<CR>", opts)
     vim.keymap.set("n", "gh", vim.lsp.buf.hover, opts)
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
     vim.keymap.set("n", "gk", vim.lsp.buf.signature_help, opts)
-    -- vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
-    -- vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
-    -- vim.keymap.set("n", "<space>wl", function()
-    --   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    -- end, opts)
     vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
     vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, opts)
     vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
     vim.keymap.set("n", "<space>f", function()
       require("conform").format({ async = true, lsp_fallback = true })
     end, opts)
-    vim.keymap.set("n", "gp", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", { noremap = true })
+    vim.keymap.set("n", "gd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", { noremap = true })
+    vim.keymap.set("n", "gt", "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>", { noremap = true })
   end,
 })
 vim.keymap.set("n", "<leader>nl", function()

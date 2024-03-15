@@ -184,4 +184,13 @@ function M.toggle_copilot()
     end
   end
 end
+
+-- 关闭所有浮动窗口
+function M.close_all_float_windows()
+    for _, win_id in ipairs(vim.api.nvim_list_wins()) do
+        if vim.api.nvim_win_get_config(win_id).relative ~= '' then
+            vim.api.nvim_win_close(win_id, true)
+        end
+    end
+end
 return M
