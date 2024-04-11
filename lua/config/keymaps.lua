@@ -150,9 +150,6 @@ map("n", "<leader>bo", ":BufferLineCloseRight<CR>:BufferLineCloseLeft<CR>", opt)
 -- 关闭选中标签页
 map("n", "<leader>bp", ":BufferLinePickClose<CR>", opt)
 
--- ctrl + /
-map("n", "<C-_>", "gcc", { noremap = false })
-map("v", "<C-_>", "gcc", { noremap = false })
 
 -- lsp 快捷键设置
 

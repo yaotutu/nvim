@@ -4,11 +4,12 @@ return {
         event = { "BufReadPost", "BufNewFile" },
         cmd = { "TSUpdateSync" },
         opts = {
-            ensure_installed = {},
+            ensure_installed = { "tsx", "typescript", "html", "javascript", "bash", "css", "jsdoc", "json", "json5", "lua", "yaml" },
             ignore_install = { "dart" },
             autotag = {
                 enable = true,
             },
+            auto_install = true,
             highlight = { enable = true },
             indent = { enable = true },
             fold = { enable = true },
@@ -50,5 +51,17 @@ return {
                 },
             })
         end,
+    },
+    {
+        'numToStr/Comment.nvim',
+        dependencies = {
+            'JoosepAlviste/nvim-ts-context-commentstring',
+        },
+        lazy = false,
+        config = function()
+            require('Comment').setup({
+                pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+            })
+        end
     }
 }
