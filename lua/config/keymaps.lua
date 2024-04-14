@@ -174,6 +174,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       require("conform").format({ async = true, lsp_fallback = true })
     end, opts)
     vim.keymap.set("n", "gd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", { noremap = true })
+    vim.keymap.set("n", "<space>gd", vim.lsp.buf.definition, { noremap = true })
     vim.keymap.set("n", "gt", "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>", { noremap = true })
   end,
 })
