@@ -18,7 +18,8 @@ return {
           "typos_lsp",
           "biome",
           "tsserver",
-          "jsonls"
+          "jsonls",
+          "eslint"
         },
       })
     end,
