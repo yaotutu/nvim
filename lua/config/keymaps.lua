@@ -150,7 +150,6 @@ map("n", "<leader>bo", ":BufferLineCloseRight<CR>:BufferLineCloseLeft<CR>", opt)
 -- 关闭选中标签页
 map("n", "<leader>bp", ":BufferLinePickClose<CR>", opt)
 
-
 -- lsp 快捷键设置
 
 vim.keymap.set("n", "go", vim.diagnostic.open_float)
@@ -171,7 +170,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, opts)
     vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
     vim.keymap.set("n", "<space>f", function()
-      require("conform").format({ async = true, lsp_fallback = true })
+      Tools.save_and_format()
     end, opts)
     vim.keymap.set("n", "gd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", { noremap = true })
     vim.keymap.set("n", "<space>gd", vim.lsp.buf.definition, { noremap = true })
@@ -224,8 +223,10 @@ vim.keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<cr>", opt)
 -- undo tree
 vim.keymap.set("n", "<leader>fu", "<cmd>Telescope undo<cr>", opt)
 -- lsp
-vim.keymap.set("n", "<leader>fd", "<cmd>lua require'telescope.builtin'.diagnostics() <CR>", opt)
-vim.keymap.set("n", "<leader>fc", "<cmd>lua require'telescope.builtin'.diagnostics({bufnr=0}) <CR>", opt)
+-- vim.keymap.set("n", "<leader>fd", "<cmd>lua require'telescope.builtin'.diagnostics() <CR>", opt)
+-- vim.keymap.set("n", "<leader>fc", "<cmd>lua require'telescope.builtin'.diagnostics({bufnr=0}) <CR>", opt)
+--
+vim.keymap.set("n", "<leader>fj", "<cmd>lua require'telescope.builtin'.commands({prompt_title = 'Search Commands',}) <CR>", opt)
 -- todo comments
 vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope <CR>", opt)
 --- toggle copilot

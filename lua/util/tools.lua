@@ -187,10 +187,40 @@ end
 
 -- 关闭所有浮动窗口
 function M.close_all_float_windows()
-    for _, win_id in ipairs(vim.api.nvim_list_wins()) do
-        if vim.api.nvim_win_get_config(win_id).relative ~= '' then
-            vim.api.nvim_win_close(win_id, true)
-        end
+  for _, win_id in ipairs(vim.api.nvim_list_wins()) do
+    if vim.api.nvim_win_get_config(win_id).relative ~= "" then
+      vim.api.nvim_win_close(win_id, true)
     end
+  end
+end
+
+-- 保存并格式化文件
+
+function M.save_and_format()
+  local bufnr = vim.api.nvim_get_current_buf() -- 获取当前缓冲区
+  local filetype = vim.bo[bufnr].filetype -- 获取文件类型
+
+  -- 检查文件是否有未保存的更改
+  if vim.bo[bufnr].modified then
+    -- 保存文件
+    vim.cmd("write")
+  end
+
+  -- 执行格式化
+  require("conform").format({
+    async = true,
+    lsp_fallback = true,
+  }, function()
+    -- 格式化完成后，发送通知
+    vim.notify("格式化完成", "info", { title = "Conform" })
+
+    -- 检查文件类型
+    if filetype == "typescript" or filetype == "typescriptreact" then
+      -- 如果是 TypeScript 或 TSX，执行额外的命令
+      vim.cmd("echo '执行 TypeScript 特定命令'")
+      vim.cmd("TSToolsAddMissingImports")
+      -- 在这里添加其他特定命令
+    end
+  end)
 end
 return M
