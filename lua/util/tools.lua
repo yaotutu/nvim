@@ -198,7 +198,7 @@ end
 
 function M.save_and_format()
   local bufnr = vim.api.nvim_get_current_buf() -- 获取当前缓冲区
-  local filetype = vim.bo[bufnr].filetype -- 获取文件类型
+  local filetype = vim.bo[bufnr].filetype      -- 获取文件类型
 
   -- 检查文件是否有未保存的更改
   if vim.bo[bufnr].modified then
@@ -223,4 +223,177 @@ function M.save_and_format()
     end
   end)
 end
+
+-- 封装命令执行函数
+function M.execute_command(selected_command)
+  if type(selected_command) == "string" and selected_command ~= "" then
+    local status, err = pcall(vim.cmd, selected_command)
+    if not status then
+      vim.notify("Error executing command: " .. err, vim.log.levels.ERROR)
+    end
+  else
+    vim.notify("Invalid command", vim.log.levels.ERROR)
+  end
+end
+
+-- 确保有多个窗口时再关闭
+function M.safe_close_window()
+  if vim.fn.winnr("$") > 1 then -- 确保有多个窗口
+    vim.cmd("q")                -- 关闭当前窗口
+  else
+    vim.notify("Cannot close last window", vim.log.levels.WARN)
+  end
+end
+
+-- 安全退出插入模式
+function M.safe_exit_insert_mode()
+  local current_mode = vim.api.nvim_get_mode().mode              -- 获取当前模式
+  if current_mode == "i" then                                    -- 检查当前模式是否是插入模式
+    vim.cmd("stopinsert")                                        -- 退出插入模式
+    vim.notify("Exited insert mode safely", vim.log.levels.INFO) -- 通知用户
+  else
+    vim.notify("Not in insert mode", vim.log.levels.INFO)        -- 如果不是插入模式，通知用户
+  end
+end
+
+--  安全关闭 Telescope
+function M.safe_close_telescope(prompt_bufnr)
+  if vim.api.nvim_buf_is_valid(prompt_bufnr) then -- 检查缓冲区是否有效
+    local success, err = pcall(function()
+      local actions = require("telescope.actions")
+      actions.close(prompt_bufnr) -- 尝试关闭 `Telescope`
+    end)
+    if not success then
+      vim.notify("Error closing Telescope: " .. err, vim.log.levels.ERROR)
+    end
+  else
+    vim.notify("Buffer is no longer valid; Telescope might have closed", vim.log.levels.WARN)
+  end
+end
+
+-- 搜索并执行命令
+function M.search_and_execute_commands()
+  require("telescope.builtin").commands({
+    prompt_title = "Search Neovim Commands",
+    attach_mappings = function(_, map)
+      map("i", "<CR>", function(prompt_bufnr)
+        local selected_command = require("telescope.actions.state").get_selected_entry().name
+
+        if selected_command then
+          local status, err = pcall(vim.cmd, selected_command)
+          if not status then
+            vim.notify("Error executing command: " .. err, vim.log.levels.ERROR)
+          end
+        end
+        M.safe_close_telescope(prompt_bufnr) -- 使用 `M.safe_close`
+        M.safe_exit_insert_mode()
+      end)
+      map("n", "<CR>", function(prompt_bufnr)
+        local selected_command = require("telescope.actions.state").get_selected_entry().name
+        if selected_command then
+          local status, err = pcall(vim.cmd, selected_command)
+          if not status then
+            vim.notify("Error executing command: " .. err, vim.log.levels.ERROR)
+          end
+        end
+        M.safe_close_telescope(prompt_bufnr) -- 使用 `M.safe_close`
+        M.safe_exit_insert_mode()
+      end)
+      return true -- 允许自定义按键映射
+    end,
+    -- 过滤器，确保只检索以 "TS" 开头的命令
+    sorter = require("telescope.sorters").get_generic_fuzzy_sorter(), -- 使用默认排序
+    find_command = function(command_list)                             -- 自定义命令过滤
+      local filtered_commands = {}
+      for _, cmd in ipairs(command_list) do
+        if cmd:sub(1, 2) == "TS" then -- 只保留以 "TS" 开头的命令
+          table.insert(filtered_commands, cmd)
+        end
+      end
+      return filtered_commands
+    end,
+  })
+end
+
+M.root_patterns = { ".git", "lua" }
+
+-- returns the root directory based on:
+-- * lsp workspace folders
+-- * lsp root_dir
+-- * root pattern of filename of the current buffer
+-- * root pattern of cwd
+---@return string
+function M.get_root()
+  ---@type string?
+  local path = vim.api.nvim_buf_get_name(0)
+  path = path ~= "" and vim.loop.fs_realpath(path) or nil
+  ---@type string[]
+  local roots = {}
+  if path then
+    for _, client in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+      local workspace = client.config.workspace_folders
+      local paths = workspace
+          and vim.tbl_map(function(ws)
+            return vim.uri_to_fname(ws.uri)
+          end, workspace)
+          or client.config.root_dir and { client.config.root_dir }
+          or {}
+      for _, p in ipairs(paths) do
+        local r = vim.loop.fs_realpath(p)
+        if path:find(r, 1, true) then
+          roots[#roots + 1] = r
+        end
+      end
+    end
+  end
+  table.sort(roots, function(a, b)
+    return #a > #b
+  end)
+  ---@type string?
+  local root = roots[1]
+  if not root then
+    path = path and vim.fs.dirname(path) or vim.loop.cwd()
+    ---@type string?
+    root = vim.fs.find(M.root_patterns, { path = path, upward = true })[1]
+    root = root and vim.fs.dirname(root) or vim.loop.cwd()
+  end
+  ---@cast root string
+  return root
+end
+
+-- this will return a function that calls telescope.
+-- cwd will default to lazyvim.util.get_root
+-- for `files`, git_files or find_files will be chosen depending on .git
+function M.telescope(builtin, opts)
+  local params = { builtin = builtin, opts = opts }
+  return function()
+    builtin = params.builtin
+    opts = params.opts
+    opts = vim.tbl_deep_extend("force", { cwd = M.get_root() }, opts or {})
+    if builtin == "files" then
+      if vim.loop.fs_stat((opts.cwd or vim.loop.cwd()) .. "/.git") then
+        opts.show_untracked = true
+        builtin = "git_files"
+      else
+        builtin = "find_files"
+      end
+    end
+    if opts.cwd and opts.cwd ~= vim.loop.cwd() then
+      opts.attach_mappings = function(_, map)
+        map("i", "<a-c>", function()
+          local action_state = require("telescope.actions.state")
+          local line = action_state.get_current_line()
+          M.telescope(
+            params.builtin,
+            vim.tbl_deep_extend("force", {}, params.opts or {}, { cwd = false, default_text = line })
+          )()
+        end)
+        return true
+      end
+    end
+
+    require("telescope.builtin")[builtin](opts)
+  end
+end
+
 return M

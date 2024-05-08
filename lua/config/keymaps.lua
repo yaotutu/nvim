@@ -1,4 +1,4 @@
-local Util = require("util")
+-- local Util = require("util")
 local Tools = require("util.tools")
 
 -- disable default keymap
@@ -212,10 +212,10 @@ vim.keymap.set("n", "<leader>sp", '<cmd>lua require("spectre").open_file_search(
 -- telescope
 -- vim.keymap.set('n', '<leader>ff', "<cmd>Telescope live_grep<cr>", opt)
 vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", opt)
-vim.keymap.set("n", "<leader>ff", Util.telescope("files"), opt)
-vim.keymap.set("n", "<leader>fF", Util.telescope("files", { cwd = false }), opt)
+vim.keymap.set("n", "<leader>ff", Tools.telescope("files"), opt)
+vim.keymap.set("n", "<leader>fF", Tools.telescope("files", { cwd = false }), opt)
 vim.keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", opt)
-vim.keymap.set("n", "<leader>fR", Util.telescope("oldfiles", { cwd = vim.loop.cwd() }), opt)
+vim.keymap.set("n", "<leader>fR", Tools.telescope("oldfiles", { cwd = vim.loop.cwd() }), opt)
 vim.keymap.set("n", "<leader>fp", "<cmd>Telescope projects<cr>", opt)
 -- git
 vim.keymap.set("n", "<leader>gc", "<cmd>Telescope git_commits<cr>", opt)
@@ -226,7 +226,7 @@ vim.keymap.set("n", "<leader>fu", "<cmd>Telescope undo<cr>", opt)
 -- vim.keymap.set("n", "<leader>fd", "<cmd>lua require'telescope.builtin'.diagnostics() <CR>", opt)
 -- vim.keymap.set("n", "<leader>fc", "<cmd>lua require'telescope.builtin'.diagnostics({bufnr=0}) <CR>", opt)
 --
-vim.keymap.set("n", "<leader>fj", "<cmd>lua require'telescope.builtin'.commands({prompt_title = 'Search Commands',}) <CR>", opt)
+vim.keymap.set("n", "<leader>fj", Tools.search_and_execute_commands, opt)
 -- todo comments
 vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope <CR>", opt)
 --- toggle copilot
