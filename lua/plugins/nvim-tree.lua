@@ -1,17 +1,16 @@
 local function my_on_attach(bufnr)
-  local api = require('nvim-tree.api')
+  local api = require("nvim-tree.api")
 
   local function opts(desc)
-    return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
   end
 
   api.config.mappings.default_on_attach(bufnr)
 
   -- remove a default
-  vim.keymap.del('n', 's', { buffer = bufnr })
-  vim.keymap.del('n', '<C-K>',{ buffer = bufnr })
+  vim.keymap.del("n", "s", { buffer = bufnr })
+  vim.keymap.del("n", "<C-K>", { buffer = bufnr })
 end
-
 
 return {
   "nvim-tree/nvim-tree.lua",
@@ -27,12 +26,13 @@ return {
       respect_buf_cwd = true,
       update_focused_file = {
         enable = true,
-        update_root = true
+        update_root = true,
       },
       filters = {
         dotfiles = true,
-        exclude = { "node_modules",  }
-      }
+        exclude = { "node_modules" },
+        enable = false,
+      },
     })
   end,
 }
