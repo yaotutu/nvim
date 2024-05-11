@@ -214,6 +214,7 @@ vim.keymap.set("n", "<leader>fn", '<cmd>lua require("spectre").open_file_search(
 -- telescope
 -- vim.keymap.set('n', '<leader>ff', "<cmd>Telescope live_grep<cr>", opt)
 vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", opt)
+vim.keymap.set("n", "<leader>fs", "<cmd>Telescope current_buffer_fuzzy_find<cr>", opt)
 vim.keymap.set("n", "<leader>ff", Tools.telescope("files"), opt)
 vim.keymap.set("n", "<leader>fF", Tools.telescope("files", { cwd = false }), opt)
 vim.keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", opt)

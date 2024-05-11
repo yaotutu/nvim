@@ -71,7 +71,7 @@ vim.o.list = false
 vim.o.listchars = "space:·,tab:··"
 -- 补全增强
 vim.o.wildmenu = true
--- Dont' pass messages to |ins-completin menu|
+-- Dont' pass messages to |ins-completion menu|
 vim.o.shortmess = vim.o.shortmess .. "c"
 -- 补全最多显示10行
 vim.o.pumheight = 10
