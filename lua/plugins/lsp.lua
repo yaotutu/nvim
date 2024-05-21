@@ -57,17 +57,16 @@ return {
       -- 通用配置
       require("mason").setup()
       require("mason-lspconfig").setup()
-      require("lua.plugins.lsp.html").setup()
-      require("lua.plugins.lsp.biome").setup()
-      require("lua.plugins.lsp.cssls").setup()
-      require("lua.plugins.lsp.emmet").setup()
-      require("lua.plugins.lsp.eslint").setup()
-      require("lua.plugins.lsp.jsonls").setup()
-      require("lua.plugins.lsp.lua-ls").setup()
-      require("lua.plugins.lsp.marksman").setup()
-      require("lua.plugins.lsp.tailwindcss").setup()
-      require("lua.plugins.lsp.typos").setup()
-    
+      require("plugins.lsp.html").setup()
+      require("plugins.lsp.biome").setup()
+      require("plugins.lsp.cssls").setup()
+      require("plugins.lsp.emmet").setup()
+      require("plugins.lsp.eslint").setup()
+      require("plugins.lsp.jsonls").setup()
+      require("plugins.lsp.lua-ls").setup()
+      require("plugins.lsp.marksman").setup()
+      require("plugins.lsp.tailwindcss").setup()
+      require("plugins.lsp.typos").setup()
     end,
   },
   {
