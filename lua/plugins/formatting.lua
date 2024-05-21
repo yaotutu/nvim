@@ -9,6 +9,7 @@ return {
         javascriptreact = { { "biome", "prettierd", "prettier" } },
         typescript = { { "biome", "prettierd", "prettier" } },
         typescriptreact = { { "biome", "prettierd", "prettier" } },
+        vue = { { "prettierd", "prettier" } },
       },
     })
   end,
