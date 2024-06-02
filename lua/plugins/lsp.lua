@@ -67,6 +67,7 @@ return {
       require("plugins.lsp.marksman").setup()
       require("plugins.lsp.tailwindcss").setup()
       require("plugins.lsp.typos").setup()
+      require("plugins.lsp.prisma").setup()
     end,
   },
   {

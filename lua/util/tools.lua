@@ -253,6 +253,7 @@ function M.save_and_format()
       if filetype == "typescript" or filetype == "typescriptreact" then
         vim.cmd("echo '执行 TypeScript 特定命令'")
         vim.cmd("TSToolsAddMissingImports")
+        vim.cmd("TSToolsRemoveUnused")
         -- 在这里添加其他特定命令
       end
     end
