@@ -68,6 +68,7 @@ return {
       require("plugins.lsp.tailwindcss").setup()
       require("plugins.lsp.typos").setup()
       require("plugins.lsp.prisma").setup()
+      require("plugins.lsp.bashls").setup()
     end,
   },
   {
