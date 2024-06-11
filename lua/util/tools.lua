@@ -196,9 +196,10 @@ end
 
 -- 保存并格式化文件
 
+
 function M.save_and_format()
   local bufnr = vim.api.nvim_get_current_buf() -- 获取当前缓冲区
-  local filetype = vim.bo[bufnr].filetype -- 获取文件类型
+  local filetype = vim.bo[bufnr].filetype      -- 获取文件类型
 
   -- 检查文件是否有未保存的更改
   if vim.bo[bufnr].modified then
@@ -206,58 +207,38 @@ function M.save_and_format()
     vim.cmd("write")
   end
 
-  -- 执行格式化
-  -- require("conform").format({
-  --   async = true,
-  --   lsp_fallback = true,
-  -- }, function(formatted_by)
-  --   -- 格式化完成后，发送通知
-  --   vim.notify("格式化完成", "info", { title = "Conform" })
-  --
-  --   -- 检查文件类型
-  --   if filetype == "typescript" or filetype == "typescriptreact" then
-  --     -- 如果是 TypeScript 或 TSX，执行额外的命令
-  --     vim.cmd("echo '执行 TypeScript 特定命令'")
-  --     vim.cmd("TSToolsAddMissingImports")
-  --     -- 在这里添加其他特定命令
-  --   end
-  --
-  --   if formatted_by == "lsp" then
-  --     vim.notify(
-  --       "使用了 LSP 格式化，因为没有其他格式化工具可用",
-  --       "warn",
-  --       { title = "Conform - LSP Fallback" }
-  --     )
-  --   end
-  -- end)
-  require("conform").format({
-    async = true,
-    lsp_fallback = true,
-  }, function(err, did_edit)
-    if err then
-      vim.notify("格式化失败: "..err, "error", { title = "Conform" })
-    else
-      -- 格式化完成后的通知
-      -- vim.notify("格式化完成", "info", { title = "Conform" })
+  -- 检查文件类型并执行相应命令
+  if filetype == "typescript" or filetype == "typescriptreact" then
+    vim.cmd("echo '执行 TypeScript 特定命令'")
+    vim.cmd("TSToolsAddMissingImports")
 
-      -- 检查是否将使用 LSP 作为格式化的回退
-      local options = {} -- 根据需要设置 options
-      if require("conform").will_fallback_lsp(options) then
-        vim.notify(
-          "使用了 LSP 作为格式化工具，因为没有其他工具可用",
-          "warn",
-          { title = "Conform - LSP Fallback" }
-        )
+    -- 在这里添加其他特定命令
+  end
+
+  -- 延迟一点时间再执行格式化操作，确保特定命令执行完毕
+  vim.defer_fn(function()
+    require("conform").format({
+      async = true,
+      lsp_fallback = true,
+    }, function(err, did_edit)
+      if err then
+        vim.notify("格式化失败: " .. err, "error", { title = "Conform" })
+      else
+        -- 格式化完成后的通知
+        -- vim.notify("格式化完成", "info", { title = "Conform" })
+
+        -- 检查是否将使用 LSP 作为格式化的回退
+        local options = {} -- 根据需要设置 options
+        if require("conform").will_fallback_lsp(options) then
+          vim.notify(
+            "使用了 LSP 作为格式化工具，因为没有其他工具可用",
+            "warn",
+            { title = "Conform - LSP Fallback" }
+          )
+        end
       end
-      -- 检查文件类型并执行相应命令
-      if filetype == "typescript" or filetype == "typescriptreact" then
-        vim.cmd("echo '执行 TypeScript 特定命令'")
-        vim.cmd("TSToolsAddMissingImports")
-        vim.cmd("TSToolsRemoveUnused")
-        -- 在这里添加其他特定命令
-      end
-    end
-  end)
+    end)
+  end, 1000) -- 延迟 200 毫秒执行格式化操作
 end
 
 -- 封装命令执行函数
@@ -275,7 +256,7 @@ end
 -- 确保有多个窗口时再关闭
 function M.safe_close_window()
   if vim.fn.winnr("$") > 1 then -- 确保有多个窗口
-    vim.cmd("q") -- 关闭当前窗口
+    vim.cmd("q")                -- 关闭当前窗口
   else
     vim.notify("Cannot close last window", vim.log.levels.WARN)
   end
@@ -283,12 +264,12 @@ end
 
 -- 安全退出插入模式
 function M.safe_exit_insert_mode()
-  local current_mode = vim.api.nvim_get_mode().mode -- 获取当前模式
-  if current_mode == "i" then -- 检查当前模式是否是插入模式
-    vim.cmd("stopinsert") -- 退出插入模式
+  local current_mode = vim.api.nvim_get_mode().mode              -- 获取当前模式
+  if current_mode == "i" then                                    -- 检查当前模式是否是插入模式
+    vim.cmd("stopinsert")                                        -- 退出插入模式
     vim.notify("Exited insert mode safely", vim.log.levels.INFO) -- 通知用户
   else
-    vim.notify("Not in insert mode", vim.log.levels.INFO) -- 如果不是插入模式，通知用户
+    vim.notify("Not in insert mode", vim.log.levels.INFO)        -- 如果不是插入模式，通知用户
   end
 end
 
@@ -339,7 +320,7 @@ function M.search_and_execute_commands()
     end,
     -- 过滤器，确保只检索以 "TS" 开头的命令
     sorter = require("telescope.sorters").get_generic_fuzzy_sorter(), -- 使用默认排序
-    find_command = function(command_list) -- 自定义命令过滤
+    find_command = function(command_list)                             -- 自定义命令过滤
       local filtered_commands = {}
       for _, cmd in ipairs(command_list) do
         if cmd:sub(1, 2) == "TS" then -- 只保留以 "TS" 开头的命令
@@ -372,8 +353,8 @@ function M.get_root()
           and vim.tbl_map(function(ws)
             return vim.uri_to_fname(ws.uri)
           end, workspace)
-        or client.config.root_dir and { client.config.root_dir }
-        or {}
+          or client.config.root_dir and { client.config.root_dir }
+          or {}
       for _, p in ipairs(paths) do
         local r = vim.loop.fs_realpath(p)
         if path:find(r, 1, true) then
