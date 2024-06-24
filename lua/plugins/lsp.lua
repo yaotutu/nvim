@@ -69,11 +69,26 @@ return {
       require("plugins.lsp.typos").setup()
       require("plugins.lsp.prisma").setup()
       require("plugins.lsp.bashls").setup()
+      -- require("plugins.lsp.tsserver").setup()
+      require("plugins.lsp.volar").setup()
     end,
   },
   {
     "pmizio/typescript-tools.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    opts = {},
+    config = function()
+      require("typescript-tools").setup({
+        settings = {
+          tsserver_plugins = {
+            "@vue/typescript-plugin",
+          },
+        },
+        filetypes = {
+          "javascript",
+          "typescript",
+          "vue",
+        },
+      })
+    end,
   },
 }

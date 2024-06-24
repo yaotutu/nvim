@@ -229,7 +229,12 @@ vim.keymap.set("n", "<leader>fu", "<cmd>Telescope undo<cr>", opt)
 -- vim.keymap.set("n", "<leader>fd", "<cmd>lua require'telescope.builtin'.diagnostics() <CR>", opt)
 -- vim.keymap.set("n", "<leader>fc", "<cmd>lua require'telescope.builtin'.diagnostics({bufnr=0}) <CR>", opt)
 --
-vim.keymap.set("n", "<leader>fj", Tools.search_and_execute_commands, opt)
+-- vim.keymap.set("n", "<leader>fj", Tools.search_and_execute_commands, opt)
+
+-- legendary
+vim.keymap.set("n", "<leader>jj", "<cmd>Legendary functions<cr>", opt)
+
+
 -- todo comments
 vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope <CR>", opt)
 --- toggle copilot
