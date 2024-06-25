@@ -196,7 +196,6 @@ end
 
 -- 保存并格式化文件
 
-
 function M.save_and_format()
   local bufnr = vim.api.nvim_get_current_buf() -- 获取当前缓冲区
   local filetype = vim.bo[bufnr].filetype      -- 获取文件类型
@@ -410,6 +409,42 @@ function M.telescope(builtin, opts)
     end
 
     require("telescope.builtin")[builtin](opts)
+  end
+end
+
+function M.CopilotExplainSelectedCode()
+  local mode = vim.fn.mode()
+  if mode == 'v' or mode == 'V' then
+    -- 获取光标位置
+    local start_pos = vim.fn.getpos("'<")
+    local end_pos = vim.fn.getpos("'>")
+
+    -- 获取选中的行和列
+    local start_line, start_col = start_pos[2], start_pos[3]
+    local end_line, end_col = end_pos[2], end_pos[3] + 1
+
+    -- 获取选中区域的文本
+    local lines = vim.fn.getline(start_line, end_line)
+    local selection = {}
+    if #lines > 0 then
+      for i, line in ipairs(lines) do
+        if i == 1 then
+          -- 第一行，从 start_col 开始
+          line = string.sub(line, start_col)
+        end
+        if i == #lines then
+          -- 最后一行，到 end_col 结束
+          line = string.sub(line, 1, end_col - 1)
+        end
+        table.insert(selection, line)
+      end
+      -- 输出选中文本
+      print("Selected Text:\n" .. table.concat(selection, '\n'))
+    else
+      print("No text selected.")
+    end
+  else
+    print("Not in visual mode.")
   end
 end
 

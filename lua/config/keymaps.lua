@@ -1,5 +1,5 @@
 -- local Util = require("util")
-local Tools = require("util.tools")
+local Tools = require("util")
 
 -- disable default keymap
 vim.api.nvim_set_keymap("n", "q", "<Nop>", { silent = true })
@@ -150,6 +150,9 @@ map("n", "<leader>bo", ":BufferLineCloseRight<CR>:BufferLineCloseLeft<CR>", opt)
 -- 关闭选中标签页
 map("n", "<leader>bp", ":BufferLinePickClose<CR>", opt)
 
+-- 选中全部文本
+map("n", "<leader>aa", "ggVG", opt)
+
 -- lsp 快捷键设置
 
 vim.keymap.set("n", "go", vim.diagnostic.open_float)
@@ -232,18 +235,23 @@ vim.keymap.set("n", "<leader>fu", "<cmd>Telescope undo<cr>", opt)
 -- vim.keymap.set("n", "<leader>fj", Tools.search_and_execute_commands, opt)
 
 -- legendary
-vim.keymap.set("n", "<leader>jj", "<cmd>Legendary functions<cr>", opt)
+-- vim.keymap.set("n", "<leader>jj", "<cmd>Legendary functions<cr>", opt)
+vim.keymap.set({ "n", "v", "o" }, "<leader>jj", "<cmd>Legendary functions<cr>", opt)
 
+-- copilot
+
+-- vim.keymap.set("n", "<leader>fc", Tools.CopilotExplainSelectedCode, opt)
+-- vim.keymap.set("v", "<leader>fc", Tools.CopilotExplainSelectedCode, opt)
 
 -- todo comments
 vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope <CR>", opt)
 --- toggle copilot
-vim.api.nvim_set_keymap(
-  "n",
-  "<Leader>tc",
-  "<Cmd>lua require('util.tools').toggle_copilot() <CR>",
-  { noremap = true, silent = true }
-)
+-- vim.api.nvim_set_keymap(
+--   { "n", "v", "o" },
+--   "<Leader>tc",
+--   "<Cmd>lua require('util.tools').toggle_copilot() <CR>",
+--   { noremap = true, silent = true }
+-- )
 
 -- dap
 vim.keymap.set("n", "<F5>", function()
