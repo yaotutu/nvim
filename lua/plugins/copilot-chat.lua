@@ -44,10 +44,10 @@ return {
         Tests = {
           prompt = '/COPILOT_GENERATE 请为我的代码生成测试。',
         },
-        Commit = {
-          prompt = '请为此次更改编写commit信息，遵循commitizen规范。确保标题不超过50个字符，正文在72个字符处换行。将整个消息用gitcommit语言的代码块包裹。请用简体中文实现',
-          selection = select.gitdiff,
-        },
+        -- Commit = {
+        --   prompt = '请为此次更改编写commit信息，遵循commitizen规范。确保标题不超过50个字符，正文在72个字符处换行。将整个消息用gitcommit语言的代码块包裹。请用简体中文实现',
+        --   selection = select.gitdiff,
+        -- },
         -- FixDiagnostic = {
         --   prompt = '请协助解决文件中的以下诊断问题:',
         --   selection = select.diagnostics,
