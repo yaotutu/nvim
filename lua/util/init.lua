@@ -198,7 +198,7 @@ end
 
 function M.save_and_format()
   local bufnr = vim.api.nvim_get_current_buf() -- 获取当前缓冲区
-  local filetype = vim.bo[bufnr].filetype      -- 获取文件类型
+  local filetype = vim.bo[bufnr].filetype -- 获取文件类型
 
   -- 检查文件是否有未保存的更改
   if vim.bo[bufnr].modified then
@@ -255,7 +255,7 @@ end
 -- 确保有多个窗口时再关闭
 function M.safe_close_window()
   if vim.fn.winnr("$") > 1 then -- 确保有多个窗口
-    vim.cmd("q")                -- 关闭当前窗口
+    vim.cmd("q") -- 关闭当前窗口
   else
     vim.notify("Cannot close last window", vim.log.levels.WARN)
   end
@@ -263,12 +263,12 @@ end
 
 -- 安全退出插入模式
 function M.safe_exit_insert_mode()
-  local current_mode = vim.api.nvim_get_mode().mode              -- 获取当前模式
-  if current_mode == "i" then                                    -- 检查当前模式是否是插入模式
-    vim.cmd("stopinsert")                                        -- 退出插入模式
+  local current_mode = vim.api.nvim_get_mode().mode -- 获取当前模式
+  if current_mode == "i" then -- 检查当前模式是否是插入模式
+    vim.cmd("stopinsert") -- 退出插入模式
     vim.notify("Exited insert mode safely", vim.log.levels.INFO) -- 通知用户
   else
-    vim.notify("Not in insert mode", vim.log.levels.INFO)        -- 如果不是插入模式，通知用户
+    vim.notify("Not in insert mode", vim.log.levels.INFO) -- 如果不是插入模式，通知用户
   end
 end
 
@@ -319,7 +319,7 @@ function M.search_and_execute_commands()
     end,
     -- 过滤器，确保只检索以 "TS" 开头的命令
     sorter = require("telescope.sorters").get_generic_fuzzy_sorter(), -- 使用默认排序
-    find_command = function(command_list)                             -- 自定义命令过滤
+    find_command = function(command_list) -- 自定义命令过滤
       local filtered_commands = {}
       for _, cmd in ipairs(command_list) do
         if cmd:sub(1, 2) == "TS" then -- 只保留以 "TS" 开头的命令
@@ -352,8 +352,8 @@ function M.get_root()
           and vim.tbl_map(function(ws)
             return vim.uri_to_fname(ws.uri)
           end, workspace)
-          or client.config.root_dir and { client.config.root_dir }
-          or {}
+        or client.config.root_dir and { client.config.root_dir }
+        or {}
       for _, p in ipairs(paths) do
         local r = vim.loop.fs_realpath(p)
         if path:find(r, 1, true) then
@@ -414,7 +414,7 @@ end
 
 function M.CopilotExplainSelectedCode()
   local mode = vim.fn.mode()
-  if mode == 'v' or mode == 'V' then
+  if mode == "v" or mode == "V" then
     -- 获取光标位置
     local start_pos = vim.fn.getpos("'<")
     local end_pos = vim.fn.getpos("'>")
@@ -439,7 +439,7 @@ function M.CopilotExplainSelectedCode()
         table.insert(selection, line)
       end
       -- 输出选中文本
-      print("Selected Text:\n" .. table.concat(selection, '\n'))
+      print("Selected Text:\n" .. table.concat(selection, "\n"))
     else
       print("No text selected.")
     end
@@ -448,4 +448,15 @@ function M.CopilotExplainSelectedCode()
   end
 end
 
+-- Copy to both system and Neovim clipboard
+M.copy_to_clipboard = function(text)
+  vim.fn.setreg("+", text)
+  vim.fn.setreg('"', text)
+end
+
+-- Cut to both system and Neovim clipboard
+M.cut_to_clipboard = function(text)
+  vim.fn.setreg("+", text)
+  vim.fn.setreg('"', text)
+end
 return M

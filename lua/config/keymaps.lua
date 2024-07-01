@@ -71,6 +71,7 @@ map("n", "<leader>q", ":qa!<CR>", opt)
 map("i", "<C-h>", "<ESC>I", opt)
 map("i", "<C-l>", "<ESC>A", opt)
 
+
 ------------------------------------------------------------------
 -- windows 分屏快捷键
 ------------------------------------------------------------------
@@ -189,5 +190,4 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 
 
-vim.keymap.set({ "n", "v", "o" }, "<leader>jj", "<cmd>Legendary functions<cr>", opt)
-vim.keymap.set({ "n", "v", "o" }, "<leader>jk", "<cmd>Legendary keymaps<cr>", opt)
+vim.keymap.set({ "n", "v", "o" }, "<leader>jj", "<cmd>Legendary<CR>", opt)

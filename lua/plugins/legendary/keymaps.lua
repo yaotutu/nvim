@@ -1,5 +1,6 @@
-local tools = require("util")
+local util = require("util")
 
+local generic_keymaps = {}
 -- DAP 相关的键映射
 local dap_keymaps = {
   {
@@ -180,6 +181,7 @@ local telescope_keymaps = {
   { "<leader>ft", "<cmd>TodoTelescope <cr>", description = "Telescope - Undo tree" },
 }
 
+-- SnipRun
 local sniprun_keymaps = {
   {
     mode = "v",
@@ -204,13 +206,63 @@ local sniprun_keymaps = {
   },
 }
 
-local generic_keymaps = {
+-- System clipboard
+local clipboard_keymaps = {
   {
-    -- create a keymap for the function above
-    "<leader>fc",
-    tools.CopilotExplainSelectedCode,
+    "x",
+    function()
+      local text = vim.fn.getreg('"')
+      util.cut_to_clipboard(text)
+      vim.api.nvim_command('normal! "_d')
+    end,
+    mode = { "v" },
+    description = "Cut to system and Neovim clipboard",
+  },
+  {
+    "yy",
+    function()
+      local text = vim.fn.getreg('"')
+      util.copy_to_clipboard(text)
+      vim.api.nvim_command("normal! yy")
+    end,
     mode = { "n", "v" },
-    description = "Explain selected code",
+    description = "Copy to system and Neovim clipboard",
+  },
+  {
+    "<leader>y",
+    '"+y',
+    { mode = "v" },
+    description = "Copy to system clipboard",
+  },
+  {
+    "<leader>y",
+    '"+y',
+    { mode = "n" },
+    description = "Copy to system clipboard",
+  },
+  {
+    "<leader>Y",
+    '"+Y',
+    { mode = "n" },
+    description = "Copy line to system clipboard",
+  },
+  {
+    "<leader>p",
+    '"+p',
+    { mode = "v" },
+    description = "Paste from system clipboard",
+  },
+  {
+    "<leader>p",
+    '"+p',
+    { mode = "n" },
+    description = "Paste from system clipboard",
+  },
+  {
+    "<leader>P",
+    '"+P',
+    { mode = "n" },
+    description = "Paste before from system clipboard",
   },
 }
 
@@ -246,6 +298,12 @@ local copilot_chat_keymaps = {
 }
 
 local keymaps = {
+  -- {
+  --   itemgroup = "系统相关操作",
+  --   description = "System related keymaps",
+  --   icon = "",
+  --   keymaps = clipboard_keymaps,
+  -- },
   {
     itemgroup = "SnipRun",
     description = "SnipRun Keymaps",
