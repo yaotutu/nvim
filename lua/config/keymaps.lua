@@ -151,7 +151,12 @@ map("n", "<leader>bo", ":BufferLineCloseRight<CR>:BufferLineCloseLeft<CR>", opt)
 map("n", "<leader>bp", ":BufferLinePickClose<CR>", opt)
 
 -- 选中全部文本
-map("n", "<leader>aa", "ggVG", opt)
+map("n", "<leader>as", "ggVG", opt)
+-- 复制全部数据到系统剪切板
+map("n", "<leader>ay", 'ggVG"+y', opt)
+
+-- 将当前 buffer 清空，并将系统剪切板的数据粘贴上去
+map("n", "<leader>ap", 'ggVGd"+P', opt)
 
 -- lsp 快捷键设置
 
@@ -180,121 +185,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "gt", "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>", { noremap = true })
   end,
 })
-vim.keymap.set("n", "<leader>nl", function()
-  require("noice").cmd("last")
-end)
-vim.keymap.set("n", "<leader>nl", function()
-  require("noice").cmd("dismiss")
-end)
-vim.keymap.set("n", "<leader>nh", function()
-  require("noice").cmd("history")
-end)
-vim.keymap.set("n", "<leader>nt", function()
-  require("noice").cmd("telescope")
-end)
 
--- SnipRun
-vim.api.nvim_set_keymap("v", "r", "<Plug>SnipRun", { silent = true })
-vim.api.nvim_set_keymap("n", "<leader>rx", "<Plug>SnipClose", { silent = true })
-vim.api.nvim_set_keymap("n", "<leader>r", "ggVG<leader><Plug>SnipRun", { noremap = true })
 
--- spectre
--- search current projects
-vim.keymap.set("n", "<leader>fa", '<cmd>lua require("spectre").toggle()<CR>', {
-  desc = "Toggle Spectre",
-})
--- vim.keymap.set("n", "<leader>sw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
---   desc = "Search current word",
--- })
--- vim.keymap.set("v", "<leader>sw", '<esc><cmd>lua require("spectre").open_visual()<CR>', {
---   desc = "Search current word",
--- })
--- search current buffer
-vim.keymap.set("n", "<leader>fn", '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
-  desc = "Search on current file",
-})
 
--- telescope
--- vim.keymap.set('n', '<leader>ff', "<cmd>Telescope live_grep<cr>", opt)
-vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", opt)
-vim.keymap.set("n", "<leader>fs", "<cmd>Telescope current_buffer_fuzzy_find<cr>", opt)
-vim.keymap.set("n", "<leader>ff", Tools.telescope("files"), opt)
-vim.keymap.set("n", "<leader>fF", Tools.telescope("files", { cwd = false }), opt)
-vim.keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", opt)
-vim.keymap.set("n", "<leader>fR", Tools.telescope("oldfiles", { cwd = vim.loop.cwd() }), opt)
-vim.keymap.set("n", "<leader>fp", "<cmd>Telescope projects<cr>", opt)
--- git
-vim.keymap.set("n", "<leader>gc", "<cmd>Telescope git_commits<cr>", opt)
-vim.keymap.set("n", "<leader>gs", "<cmd>Telescope git_status<cr>", opt)
--- undo tree
-vim.keymap.set("n", "<leader>fu", "<cmd>Telescope undo<cr>", opt)
--- lsp
--- vim.keymap.set("n", "<leader>fd", "<cmd>lua require'telescope.builtin'.diagnostics() <CR>", opt)
--- vim.keymap.set("n", "<leader>fc", "<cmd>lua require'telescope.builtin'.diagnostics({bufnr=0}) <CR>", opt)
---
--- vim.keymap.set("n", "<leader>fj", Tools.search_and_execute_commands, opt)
 
--- legendary
--- vim.keymap.set("n", "<leader>jj", "<cmd>Legendary functions<cr>", opt)
 vim.keymap.set({ "n", "v", "o" }, "<leader>jj", "<cmd>Legendary functions<cr>", opt)
-
--- copilot
-
--- vim.keymap.set("n", "<leader>fc", Tools.CopilotExplainSelectedCode, opt)
--- vim.keymap.set("v", "<leader>fc", Tools.CopilotExplainSelectedCode, opt)
-
--- todo comments
-vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope <CR>", opt)
---- toggle copilot
--- vim.api.nvim_set_keymap(
---   { "n", "v", "o" },
---   "<Leader>tc",
---   "<Cmd>lua require('util.tools').toggle_copilot() <CR>",
---   { noremap = true, silent = true }
--- )
-
--- dap
-vim.keymap.set("n", "<F5>", function()
-  require("dap").continue()
-end)
-vim.keymap.set("n", "<F10>", function()
-  require("dap").step_over()
-end)
-vim.keymap.set("n", "<F11>", function()
-  require("dap").step_into()
-end)
-vim.keymap.set("n", "<F12>", function()
-  require("dap").step_out()
-end)
-vim.keymap.set("n", "<Leader>b", function()
-  require("dap").toggle_breakpoint()
-end)
-vim.keymap.set("n", "<Leader>B", function()
-  require("dap").set_breakpoint()
-end)
-vim.keymap.set("n", "<Leader>lp", function()
-  require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
-end)
-vim.keymap.set("n", "<Leader>dr", function()
-  require("dap").repl.open()
-end)
-vim.keymap.set("n", "<Leader>dl", function()
-  require("dap").run_last()
-end)
-vim.keymap.set({ "n", "v" }, "<Leader>dh", function()
-  require("dap.ui.widgets").hover()
-end)
-vim.keymap.set({ "n", "v" }, "<Leader>dp", function()
-  require("dap.ui.widgets").preview()
-end)
-vim.keymap.set("n", "<Leader>df", function()
-  local widgets = require("dap.ui.widgets")
-  widgets.centered_float(widgets.frames)
-end)
-vim.keymap.set("n", "<Leader>ds", function()
-  local widgets = require("dap.ui.widgets")
-  widgets.centered_float(widgets.scopes)
-end)
-vim.keymap.set("n", "<Leader>dq", function()
-  require("dapui").close()
-end)
+vim.keymap.set({ "n", "v", "o" }, "<leader>jk", "<cmd>Legendary keymaps<cr>", opt)
